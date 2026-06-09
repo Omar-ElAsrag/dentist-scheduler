@@ -1,0 +1,54 @@
+    var pendingAmount by remember { mutableStateOf("") }
+    var pendingNotes by remember { mutableStateOf("") }
+    var pendingDateMillis by remember { mutableStateOf(System.currentTimeMillis()) }
+    var editPaymentDateGroup by remember { mutableStateOf<LocalDate?>(null) }
+    var finTreatmentFee by remember(cardDetail.id) { mutableStateOf(if (cardDetail.treatmentFee == 0.0) "" else cardDetail.treatmentFee.toString()) }
+    var finLabFees by remember(cardDetail.id) { mutableStateOf(if (cardDetail.labFees == 0.0) "" else cardDetail.labFees.toString()) }
+    var finPercentage by remember(cardDetail.id) { mutableStateOf(if (cardDetail.appliedPercentage == 0f) "" else cardDetail.appliedPercentage.toString()) }
+    var finDeduct by remember(cardDetail.id) { mutableStateOf(cardDetail.deductLabFees) }
+
+    LaunchedEffect(cardDetail.procedureTypeId) {
+        availableMaterials = if (cardDetail.procedureTypeId != null) {
+            val pt = viewModel.getProcedureTypeByIdOnce(cardDetail.procedureTypeId!!)
+            if (pt != null && !pt.materials.isNullOrBlank()) {
+                pt.materials!!.split(",").map { it.trim() }.filter { it.isNotBlank() }
+            } else emptyList()
+        } else emptyList()
+    }
+
+    LaunchedEffect(cardDetail.clinicId) {
+        if (cardDetail.appliedPercentage == 0f) {
+            val clinic = viewModel.getClinicByIdOnce(cardDetail.clinicId)
+      
+                                }
+                                SummaryRow("Associate Cut", assocCut, large = true)
+                                SummaryRow("Clinic Share", clinicShare, large = true)
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.height(12.dp))
+
+                        Button(
+                            onClick = {
+                                viewModel.updateCardFinancialSettings(
+                                    cardId = cardDetail.id,
+                                    treatmentFee = fee,
+                                    labFees = lab,
+                                    percentage = pct,
+                                    deductLabFees = finDeduct
+                                )
+                            },
+                            modifier = Modifier.fillMaxWidth(),
+                            shape = RoundedCornerShape(8.dp)
+                        ) {
+                            Text(stringResource(R.string.save_financial_settings), fontWeight = FontWeight.Bold)
+                        }
+                    }
+                }
+
+            }
+        }
+    }
+    if (showDeletePaymentConfirm && paymentToDelete != null) {
+        AlertDialog(
+            onDismissRequest = { showDeletePaymentConfirm = false; paymentToDelete = null },

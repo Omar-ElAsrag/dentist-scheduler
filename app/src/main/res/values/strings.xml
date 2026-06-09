@@ -1,0 +1,433 @@
+<resources>
+    <string name="app_name">Dentist Scheduler</string>
+
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="close">Close</string>
+    <string name="cancel_treatment">Cancel This Treatment</string>
+    <string name="confirm_cancel_title">Cancel Treatment</string>
+    <string name="confirm_cancel_message">Are you sure you want to cancel this treatment?</string>
+    <string name="reopen_treatment">Reopen Treatment</string>
+    <string name="confirm_reopen_title">Reopen Treatment</string>
+    <string name="confirm_reopen_message">Are you sure you want to reopen this treatment?</string>
+    <string name="confirm">Confirm</string>
+    <string name="search">Search</string>
+    <string name="add">Add</string>
+    <string name="all">All</string>
+    <string name="select">Select</string>
+    <string name="name">Name</string>
+    <string name="notes">Notes</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="type">Type</string>
+    <string name="material">Material</string>
+    <string name="value">Value</string>
+    <string name="reject">Reject</string>
+    <string name="save_changes">Save</string>
+
+    <!-- Navigation -->
+    <string name="nav_patients">Patients</string>
+    <string name="nav_schedule">Schedule</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_associates">Associates</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="language_label">Language</string>
+    <string name="english_label">English</string>
+    <string name="arabic_label">العربية</string>
+
+    <!-- Drawer / Side Menu -->
+    <string name="drawer_profile">Profile</string>
+    <string name="drawer_settings">Settings</string>
+    <string name="templates_label">Templates</string>
+    <string name="all_associates_clinics">All Associates / Clinics</string>
+    <string name="scheduled_visit">Scheduled Visit</string>
+    <string name="appointment_details_title">Appointment Details</string>
+    <string name="none">None</string>
+    <string name="nka">NKDA</string>
+    <string name="procedure_name_required">Procedure name cannot be blank.</string>
+    <string name="complete_step">Complete step</string>
+    <string name="locked_step">Locked</string>
+    <string name="associate_cut">Associate Cut</string>
+    <string name="clinic_share">Clinic Share</string>
+    <string name="steps_section">Steps:</string>
+
+    <!-- Schedule Screen -->
+    <string name="schedule_title">Clinical Schedules</string>
+    <string name="schedule_subtitle">Manage upcoming patient appointments chronologically</string>
+    <string name="quick_filters">QUICK FILTERS</string>
+    <string name="today">Today</string>
+    <string name="previous_day">Previous day</string>
+    <string name="next_day">Next day</string>
+    <string name="schedule_appointment">Schedule Appointment</string>
+    <string name="schedule_appointment_subtitle">Create a new appointment and optionally add treatment details.</string>
+    <string name="additional_details">Additional Details</string>
+    <string name="add_other_details_now">Add Other Details Now</string>
+    <string name="add_clinical_procedure">Add clinical procedure and mark patient in progress</string>
+    <string name="select_steps_to_include">Select steps to include:</string>
+    <string name="patient_full_name">Patient Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="appointment_date">Appointment Date</string>
+    <string name="appointment_time">Appointment Time</string>
+    <string name="appointment_notes">Appointment Notes</string>
+    <string name="select_associate_clinic">Associate / Clinic</string>
+    <string name="select_procedure">Select Clinical Procedure</string>
+    <string name="select_type">Select Type</string>
+    <string name="select_material">Select Material</string>
+    <string name="tooth_teeth_number">Tooth / Teeth Number</string>
+    <string name="no_time_set">No time set</string>
+    <string name="select_time_title">Select Time</string>
+    <string name="no_appointments_title">No scheduled appointments found</string>
+    <string name="no_appointments_subtitle">Tap the \'+\' button below to schedule a new patient.</string>
+    <string name="schedule_appointment_btn">Schedule Appointment</string>
+    <plurals name="appointments_count">
+        <item quantity="one">%d appointment on %s</item>
+        <item quantity="other">%d appointments on %s</item>
+    </plurals>
+
+    <!-- Patients Screen -->
+    <string name="patients_title">Patients</string>
+    <string name="patients_subtitle">Manage and track your patient treatments</string>
+    <string name="search_patients">Search Patients</string>
+    <string name="filter_patients">Filter Patients</string>
+    <string name="associate_clinic_filter">Associate / Clinic</string>
+    <string name="status_filter">Status</string>
+    <string name="date_filter">Date</string>
+    <string name="in_progress">In Progress</string>
+    <string name="completed">Completed</string>
+    <string name="canceled">Canceled</string>
+    <string name="this_month">This Month</string>
+    <string name="previous_month">Previous Month</string>
+    <string name="custom_month">Custom Month…</string>
+    <string name="clear_all">Clear All</string>
+    <string name="select_month_title">Select Month</string>
+    <string name="new_patient_title">New Patient</string>
+    <string name="new_patient_subtitle">Register a new patient and optionally create a procedure card.</string>
+    <string name="patient_information">Patient Information</string>
+    <string name="medical_alerts">Medical Alerts</string>
+    <string name="initial_procedure">Initial Procedure (Optional)</string>
+    <string name="treatment_steps">Treatment Steps</string>
+    <string name="treatment_steps_description">Add the planned clinical workflow for this procedure.</string>
+    <string name="register_patient">Register Patient</string>
+    <string name="no_patients_title">No patients yet</string>
+    <string name="no_patients_subtitle">Tap the + button to add a new patient.</string>
+    <string name="no_matching_title">No matching patients</string>
+    <string name="no_matching_subtitle">Refine your search or filters.</string>
+    <string name="systemic_condition_label">Systemic Condition</string>
+    <string name="allergies_label">Allergies</string>
+    <string name="dental_history">Dental History:</string>
+    <string name="procedures_label">PROCEDURES</string>
+    <string name="medical_alert">MEDICAL ALERT</string>
+    <plurals name="patients_count">
+        <item quantity="one">%d Patient</item>
+        <item quantity="other">%d Patients</item>
+    </plurals>
+
+    <!-- Patient Portal -->
+    <string name="treatment_portal">Treatment Portal</string>
+    <string name="medical_file_tab">Medical File</string>
+    <string name="next_appointment_title">Next Appointment</string>
+    <string name="next_appointment_date_label">Next Appointment Date</string>
+    <string name="appointment_time_label">Appointment Time</string>
+    <string name="next_appointment_notes">Next Appointment Notes</string>
+    <string name="appointment_notes_placeholder">Notes for next visit…</string>
+    <string name="save_next_appointment">Save Next Appointment</string>
+    <string name="next_treatment_step">Next Treatment Step</string>
+    <string name="no_appointment_scheduled">No appointment scheduled</string>
+    <string name="schedule_next">Schedule Next Appointment</string>
+
+    <!-- Payment Summary -->
+    <string name="payment_summary">Payment Summary</string>
+    <string name="total_fees">Total Fees</string>
+    <string name="total_paid">Total Paid</string>
+    <string name="remaining_balance">Remaining Balance</string>
+    <string name="fully_paid">Fully Paid ✓</string>
+    <string name="payment_history">Payment History</string>
+    <plurals name="more_count">
+        <item quantity="one">+%d more</item>
+        <item quantity="other">+%d more</item>
+    </plurals>
+
+    <!-- Add Procedure Card -->
+    <string name="add_procedure_card">Add Procedure Card</string>
+    <string name="create_procedure_card">Create Procedure Card</string>
+    <string name="select_clinic_procedure">Associate / Clinic</string>
+    <string name="select_type_label">Type</string>
+    <string name="select_material_label">Material</string>
+    <string name="tooth_label">Tooth / Teeth Number</string>
+    <string name="notes_label">Notes</string>
+    <string name="add_systemic_condition">Add Systemic Condition</string>
+    <string name="add_allergy">Add Allergy</string>
+    <string name="delete_patient_record">Delete Patient Record</string>
+    <string name="delete_patient_dialog_title">Delete Patient Record?</string>
+    <string name="delete_patient_dialog_body">This will permanently delete %s and ALL procedure cards. This action cannot be undone.</string>
+    <string name="add_alert_dialog_title">Add Systemic Condition</string>
+    <string name="save_alert">Save</string>
+    <string name="add_photo">Add Photo</string>
+    <string name="mark_in_progress">Mark In Progress</string>
+    <string name="mark_completed">Mark Completed</string>
+    <string name="mark_all_complete">Mark as Complete</string>
+    <string name="mark_all_incomplete">Mark as Incomplete</string>
+    <string name="financial_settings">▼ FINANCIAL SETTINGS</string>
+    <string name="financial_settings_collapsed">▸ FINANCIAL SETTINGS</string>
+    <string name="deduct_lab_fees">Deduct lab fees before calculating share</string>
+    <string name="payment_history_title">PAYMENT HISTORY</string>
+    <string name="add_payment">Add Payment</string>
+    <string name="financial_summary">FINANCIAL SUMMARY</string>
+    <string name="save_financial_settings">Save Financial Settings</string>
+    <string name="delete_card_dialog_title">Delete Procedure Card?</string>
+    <string name="delete_card_dialog_body">This will permanently delete this procedure card and all recorded steps. This action cannot be undone.</string>
+    <string name="add_payment_dialog_title">Add Payment</string>
+    <string name="no_cards_title">No procedure cards on file</string>
+    <string name="no_cards_subtitle">Use the form above to create a new procedure card.</string>
+    <string name="systemic_conditions_title">Systemic Conditions</string>
+    <string name="no_systemic_text">No systemic conditions recorded.</string>
+    <string name="drug_allergies_title">Drug Allergies</string>
+    <string name="no_allergies_text">No drug allergies recorded.</string>
+    <string name="remaining_steps">Remaining Steps</string>
+    <string name="tap_to_complete">TAP TO COMPLETE</string>
+    <string name="treatment_fee_label">Treatment Fee</string>
+    <string name="lab_fees_label">Lab Fees</string>
+    <string name="associate_share_label">Associate Share (%)</string>
+    <string name="amount_label">Amount</string>
+    <string name="payment_note_label">Note (optional)</string>
+    <string name="add_confirm">Add</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_close_portal">Close Patient Records</string>
+    <string name="cd_pick_date">Pick date</string>
+    <string name="cd_pick_time">Pick time</string>
+    <string name="cd_remove_step">Remove step</string>
+    <string name="cd_cancel_step">Cancel</string>
+    <string name="cd_insert_step">Insert step here</string>
+    <string name="cd_confirm_step">Confirm</string>
+    <string name="cd_add_step">Add step</string>
+    <string name="cd_photo_preview">Photo preview</string>
+    <string name="cd_close_preview">Close preview</string>
+    <string name="cd_collapse_card">Collapse</string>
+    <string name="cd_expand_card">Expand</string>
+    <string name="cd_delete_card">Delete procedure card</string>
+    <string name="cd_edit_date">Edit date</string>
+    <string name="cd_completed_step">Completed</string>
+    <string name="cd_step_photo">Step photo</string>
+    <string name="cd_attach_photo">Attach photo</string>
+    <string name="cd_post_step">Post step</string>
+    <string name="cd_main_menu">Main Settings Menu</string>
+    <string name="cd_templates_library">Templates Library</string>
+    <string name="cd_create_patient">Create Patient Profile</string>
+    <string name="cd_filter">Filter</string>
+    <string name="cd_empty">Empty</string>
+    <string name="cd_close_dialog">Close</string>
+    <string name="cd_add_associate">Add New Associate</string>
+    <string name="cd_no_entries">No entries</string>
+    <string name="cd_delete_item">Delete</string>
+    <string name="cd_close_library">Close library</string>
+    <string name="cd_remove_type">Remove type</string>
+    <string name="cd_remove_step_library">Remove step</string>
+    <string name="cd_move_up">Move up</string>
+    <string name="cd_move_down">Move down</string>
+    <string name="cd_add_step_library">Add step</string>
+    <string name="cd_add_type">Add type</string>
+    <string name="cd_delete_template">Delete template</string>
+    <string name="cd_edit_template">Edit template</string>
+    <string name="cd_expand">Expand</string>
+    <string name="cd_go_back">Go Back</string>
+    <string name="cd_profile_photo">Profile Photo</string>
+    <string name="cd_default_profile">Default Profile</string>
+    <string name="cd_pick_photo">Pick Photo</string>
+    <string name="cd_clinic_icon">Clinic</string>
+    <string name="cd_date_icon">Date</string>
+    <string name="cd_phone_icon">Phone</string>
+    <string name="cd_notes_icon">Notes</string>
+    <string name="cd_schedule_appointment_fab">Schedule Appointment</string>
+
+    <!-- Placeholders -->
+    <string name="hint_search">Enter patient name…</string>
+    <string name="hint_patient_name">Enter patient first &amp; last name…</string>
+    <string name="hint_phone">e.g. 555-0199…</string>
+    <string name="hint_systemic">e.g. Diabetes, Hypertension</string>
+    <string name="hint_allergies">e.g. Penicillin, Latex, Sulfa drugs…</string>
+    <string name="hint_step">Enter step…</string>
+    <string name="hint_new_step">Add new step…</string>
+    <string name="hint_tooth">e.g. 14, 18, or general…</string>
+    <string name="hint_notes">Enter any details regarding this procedure…</string>
+    <string name="hint_appointment_notes">Enter any details regarding this appointment…</string>
+    <string name="hint_clinic_name">e.g. Dr. Smith or Central Clinic…</string>
+    <string name="hint_percentage">Leave blank for manual</string>
+    <string name="hint_template_name">e.g. My Custom Procedure</string>
+    <string name="hint_type_step">Add step…</string>
+    <string name="hint_type_name">New type name…</string>
+    <string name="hint_type_materials">Materials…</string>
+    <string name="hint_shared_step">Step description…</string>
+    <string name="hint_shared_step_add">Add step…</string>
+    <string name="hint_search_templates">Search templates…</string>
+    <string name="hint_dentist_name">Enter your name…</string>
+    <string name="hint_bio">e.g. General dentist specializing in endodontics…</string>
+    <string name="hint_alert_value">e.g. Diabetes, Hypertension</string>
+    <string name="hint_custom_step">Log a custom step</string>
+    <string name="hint_portal_notes">Notes for next visit…</string>
+    <string name="hint_portal_step">Enter step…</string>
+
+    <!-- Placeholder display text for dropdowns -->
+    <string name="dropdown_select_clinic">Select Associate / Clinic</string>
+    <string name="dropdown_select_procedure">Select Procedure</string>
+    <string name="dropdown_select_type">Select Type</string>
+    <string name="dropdown_select_material">Select Material</string>
+
+    <!-- Clinics Screen -->
+    <string name="associates_title">Associates</string>
+    <string name="associates_subtitle">Add and manage the associate dentists or clinics you work with.</string>
+    <string name="no_associates_title">No associates or clinics configured</string>
+    <string name="no_associates_subtitle">Create new associate or clinic tags using the \'+\' button to organize your work sessions.</string>
+    <string name="add_associate_clinic">Add Associate / Clinic</string>
+    <string name="edit_associate_clinic">Edit Associate / Clinic</string>
+    <string name="deduct_lab_fees_first">Deduct lab fees first</string>
+    <string name="save_clinic">Save</string>
+    <string name="associate_clinic_name">Associate / Clinic Name</string>
+    <string name="default_share_percentage">Default Share Percentage (%)</string>
+    <string name="hint_clinic_name_input">e.g. Dr. Smith or Central Clinic…</string>
+    <string name="hint_percentage_input">Leave blank for manual</string>
+    <string name="manual_config">Manual configuration</string>
+    <string name="manual_fee_handling">Manual fee handling</string>
+
+    <!-- Procedures Library -->
+    <string name="procedures_library_title">Procedures Library</string>
+    <string name="procedures_library_subtitle">Manage procedure templates, types, and steps</string>
+    <string name="new_template">New Template</string>
+    <string name="no_templates_title">No procedure templates match</string>
+    <string name="no_templates_subtitle">Press \'New Template\' to create a custom procedure.</string>
+    <string name="edit_template_title">Edit Procedure Template</string>
+    <string name="create_template_title">Create Custom Procedure Template</string>
+    <string name="has_types_checkbox">This procedure has types (e.g. Class 1, Class 2)</string>
+    <string name="types_label">TYPES:</string>
+    <string name="type_name_label">Name</string>
+    <string name="materials_label_plural">Materials (comma separated)</string>
+    <string name="shared_steps_label">SHARED STEPS:</string>
+    <string name="steps_label">STEPS:</string>
+    <string name="type_specific_steps">Type-specific steps:</string>
+    <string name="update_template">Update Template</string>
+    <string name="save_template">Save Template</string>
+    <string name="custom_badge">CUSTOM</string>
+    <string name="has_types_label">Has types</string>
+    <string name="steps_only_label">Steps only</string>
+    <string name="procedure_name_label">Procedure Name</string>
+    <string name="all_filter">All</string>
+    <string name="no_steps_label">No steps defined.</string>
+    <string name="procedure_materials_label">Materials: %s</string>
+
+    <!-- Analytics Screen -->
+    <string name="analytics_title">Analytics</string>
+    <string name="analytics_subtitle">Observe clinic traffic, popular treatments and monthly trends</string>
+    <string name="clinic_traffic_tab">Clinic traffic</string>
+    <string name="treatment_trends_tab">Treatment trends</string>
+    <string name="monthly_clinic_activity">Monthly Clinic Activity</string>
+    <string name="activity_description">Filter procedure card activity for target clinic or view cumulative data.</string>
+    <string name="select_month_label">Select Month:</string>
+    <string name="associate_clinic_analytics">Associate / Clinic:</string>
+    <string name="all_filter_analytics">All</string>
+    <string name="financial_summary_title">Financial Summary</string>
+    <string name="total_gross_revenue">Total Gross Revenue</string>
+    <string name="total_lab_fees_label">Total Lab Fees</string>
+    <string name="associate_payout">Associate Payout</string>
+    <string name="clinic_revenue">Clinic Revenue</string>
+    <string name="ongoing_month_message">This month is currently ongoing. Displaying live cumulative data up until today.</string>
+    <string name="treatment_trends_title">Treatment Procedure Trends</string>
+    <string name="trends_description">Plot procedure volume trends over time.</string>
+    <string name="select_procedure_label">Select Procedure:</string>
+    <string name="source_label">Source:</string>
+    <string name="all_source">All</string>
+    <string name="time_span_label">Time Span:</string>
+    <string name="one_month">1 Month</string>
+    <string name="three_months">3 Months</string>
+    <string name="six_months">6 Months</string>
+    <string name="procedures_per_month">Procedure Cards per Month</string>
+    <string name="patients_metric">Patients</string>
+    <string name="patients_metric_subtitle">Total registered patients</string>
+    <string name="procedures_metric">Procedures</string>
+    <string name="procedures_metric_subtitle">Total procedure cards</string>
+    <string name="one_year">1 Year</string>
+    <string name="treatment_volumes_title">Treatment Volumes</string>
+    <string name="treatment_numbers_title">Treatment Numbers</string>
+    <string name="treatment_status_title">Treatment Status</string>
+    <string name="cards_created">Treatments Initiated</string>
+    <string name="treatment_volumes_subtitle">What procedures are you performing most? This breakdown shows your treatment mix.</string>
+    <string name="treatment_numbers_subtitle">Are you treating more patients or fewer? Month-by-month volume at a glance.</string>
+    <string name="treatment_status_subtitle">How many patients completed their treatment plan vs. dropped off?</string>
+    <string name="general_exam_statement">In this period, %1$d patients out of %2$d total patients had general examination with no other treatments.</string>
+
+    <!-- Seed Procedure Name Translations -->
+    <string name="proc_endodontic_tt">Endodontic TT</string>
+    <string name="proc_fixed_prosthodontic_tt">Fixed Prosthodontic TT</string>
+    <string name="proc_removable_prosthodontic_tt">Removable Prosthodontic TT</string>
+    <string name="proc_oral_surgery">Oral Surgery</string>
+    <string name="proc_periodontic_tt">Periodontic TT</string>
+    <string name="proc_operative_tt">Operative TT</string>
+    <string name="proc_pedodontics_tt">Pedodontics TT</string>
+    <string name="proc_general_examination">General Examination</string>
+
+    <!-- Theme -->
+    <string name="theme_label">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+
+    <!-- Profile Screen -->
+    <string name="dentist_profile">Dentist Profile</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="upload_hint">Tap circle to upload profile photo</string>
+    <string name="dentist_name_label">Dentist Name</string>
+    <string name="bio_label">Bio (optional)</string>
+
+    <!-- Details fields -->
+    <string name="systemic_conditions_field">Systemic Conditions</string>
+    <string name="drug_allergies_field">Drug Allergies</string>
+    <string name="procedure_notes_field">Procedure Notes &amp; Comments</string>
+    <string name="clinical_procedure_field">Clinical Procedure</string>
+    <string name="type_field">Type</string>
+    <string name="material_field">Material</string>
+
+    <!-- Template Editor Fees -->
+    <string name="default_fee">Default Fee</string>
+    <string name="default_lab_fee">Default Lab Fee</string>
+    <string name="fee">Fee</string>
+    <string name="lab_fee">Lab Fee</string>
+    <string name="material_pricing">Material Pricing:</string>
+    <string name="cd_delete_payment">Delete payment</string>
+
+    <!-- Missing strings for PatientPortalDialog -->
+    <string name="phone_label">Phone: %s</string>
+    <string name="medical_alerts_pending">Medical Alerts Pending</string>
+    <string name="health_record_safe">Health Record Safe</string>
+    <string name="no_payments_recorded">No payments recorded</string>
+    <string name="no_steps_recorded">No steps recorded</string>
+    <string name="no_pending_treatment_steps">No pending treatment steps</string>
+    <string name="finance">Finance</string>
+    <string name="payments_section">Payments</string>
+    <string name="financial_settings_saved">Financial settings saved</string>
+    <string name="delete_payment_dialog_title">Delete Payment</string>
+    <string name="delete_payment_dialog_body">Delete payment of $%s?</string>
+    <string name="create">Create</string>
+    <string name="next_step_text">Next: %1$s — %2$s</string>
+    <string name="paid_text">Paid: $%1$s / $%2$s</string>
+    <string name="condition">Condition</string>
+    <string name="allergy">Allergy</string>
+    <string name="percent_paid">%d%% paid</string>
+    <string name="hint_time">e.g. 10:30 AM</string>
+    <string name="no_payments_yet">No payments recorded yet.</string>
+    <string name="delete_payment_of">Delete payment of $%s?</string>
+    <string name="systemic_condition_label_single">Condition</string>
+    <string name="allergy_label_single">Allergy</string>
+    <string name="create_button">Create</string>
+
+    <string name="existing_patient">Existing Patient</string>
+    <string name="select_existing_patient">Select Existing Patient</string>
+    <string name="search_hint">Search by name or phone</string>
+    <string name="schedule_for">Schedule for %s</string>
+
+</resources>

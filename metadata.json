@@ -1,0 +1,6 @@
+{
+  "name": "Dentist Scheduler",
+  "description": "A professional tool for dentists to manage patients, clinics, procedure tracking, clinical session steps, patient medical history, photo attachments, and in-depth business analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,443 @@
+﻿<resources>
+    <string name="app_name">مدير مواعيد الأسنان</string>
+
+    <!-- Common -->
+    <string name="ok">موافق</string>
+    <string name="cancel">إلغاء</string>
+    <string name="save">حفظ</string>
+    <string name="delete">حذف</string>
+    <string name="close">إغلاق</string>
+    <string name="cancel_treatment">إلغاء هذا العلاج</string>
+    <string name="confirm_cancel_title">إلغاء العلاج</string>
+    <string name="confirm_cancel_message">هل أنت متأكد من إلغاء هذا العلاج؟</string>
+    <string name="reopen_treatment">إعادة فتح العلاج</string>
+    <string name="confirm_reopen_title">إعادة فتح العلاج</string>
+    <string name="confirm_reopen_message">هل أنت متأكد من إعادة فتح هذا العلاج؟</string>
+    <string name="confirm">تأكيد</string>
+    <string name="search">بحث</string>
+    <string name="add">إضافة</string>
+    <string name="all">الكل</string>
+    <string name="select">اختيار</string>
+    <string name="name">الاسم</string>
+    <string name="notes">ملاحظات</string>
+    <string name="date">التاريخ</string>
+    <string name="time">الوقت</string>
+    <string name="type">النوع</string>
+    <string name="material">المادة</string>
+    <string name="value">القيمة</string>
+    <string name="reject">رفض</string>
+    <string name="save_changes">حفظ</string>
+
+    <!-- Navigation -->
+    <string name="nav_patients">المرضى</string>
+    <string name="nav_schedule">المواعيد</string>
+    <string name="nav_analytics">الإحصائيات</string>
+    <string name="nav_associates">الشركاء</string>
+    <string name="nav_profile">الملف الشخصي</string>
+    <string name="nav_settings">الإعدادات</string>
+
+    <!-- Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="language_label">اللغة</string>
+    <string name="english_label">English</string>
+    <string name="arabic_label">العربية</string>
+
+    <!-- Drawer / Side Menu -->
+    <string name="drawer_profile">الملف الشخصي</string>
+    <string name="drawer_settings">الإعدادات</string>
+    <string name="templates_label">القوالب</string>
+    <string name="all_associates_clinics">جميع الشركاء / العيادات</string>
+    <string name="scheduled_visit">زيارة مجدولة</string>
+    <string name="appointment_details_title">تفاصيل الموعد</string>
+    <string name="none">لا يوجد</string>
+    <string name="nka">لا توجد حساسية دوائية معروفة</string>
+    <string name="procedure_name_required">اسم الإجراء لا يمكن أن يكون فارغاً.</string>
+    <string name="complete_step">إكمال الخطوة</string>
+    <string name="locked_step">مقفل</string>
+    <string name="associate_cut">حصة الشريك</string>
+    <string name="clinic_share">حصة العيادة</string>
+    <string name="steps_section">الخطوات:</string>
+
+    <!-- Schedule Screen -->
+    <string name="schedule_title">المواعيد السريرية</string>
+    <string name="schedule_subtitle">إدارة مواعيد المرضى القادمة حسب التسلسل الزمني</string>
+    <string name="quick_filters">مرشحات سريعة</string>
+    <string name="today">اليوم</string>
+    <string name="previous_day">اليوم السابق</string>
+    <string name="next_day">اليوم التالي</string>
+    <string name="schedule_appointment">حجز موعد</string>
+    <string name="schedule_appointment_subtitle">إنشاء موعد جديد مع إمكانية إضافة تفاصيل العلاج.</string>
+    <string name="additional_details">تفاصيل إضافية</string>
+    <string name="add_other_details_now">إضافة تفاصيل أخرى الآن</string>
+    <string name="add_clinical_procedure">إضافة إجراء سريري ووضع المريض قيد المعالجة</string>
+    <string name="select_steps_to_include">اختر الخطوات المراد تضمينها:</string>
+    <string name="patient_full_name">الاسم الكامل للمريض</string>
+    <string name="phone_number">رقم الهاتف</string>
+    <string name="appointment_date">تاريخ الموعد</string>
+    <string name="appointment_time">وقت الموعد</string>
+    <string name="appointment_notes">ملاحظات الموعد</string>
+    <string name="select_associate_clinic">الشريك / العيادة</string>
+    <string name="select_procedure">اختر الإجراء السريري</string>
+    <string name="select_type">اختر النوع</string>
+    <string name="select_material">اختر المادة</string>
+    <string name="tooth_teeth_number">رقم السن / الأسنان</string>
+    <string name="no_time_set">لم يتم تحديد وقت</string>
+    <string name="select_time_title">اختر الوقت</string>
+    <string name="no_appointments_title">لا توجد مواعيد مجدولة</string>
+    <string name="no_appointments_subtitle">اضغط على زر \'+\' أدناه لحجز مريض جديد.</string>
+    <string name="schedule_appointment_btn">حجز الموعد</string>
+    <plurals name="appointments_count">
+        <item quantity="zero">لا توجد مواعيد في %2$s</item>
+        <item quantity="one">موعد واحد في %2$s</item>
+        <item quantity="two">موعدان في %2$s</item>
+        <item quantity="few">%d مواعيد في %2$s</item>
+        <item quantity="many">%d موعداً في %2$s</item>
+        <item quantity="other">%d موعد في %2$s</item>
+    </plurals>
+
+    <!-- Patients Screen -->
+    <string name="patients_title">المرضى</string>
+    <string name="patients_subtitle">إدارة وتتبع علاجات مرضاك</string>
+    <string name="search_patients">بحث عن مرضى</string>
+    <string name="filter_patients">تصفية المرضى</string>
+    <string name="associate_clinic_filter">الشريك / العيادة</string>
+    <string name="status_filter">الحالة</string>
+    <string name="date_filter">التاريخ</string>
+    <string name="in_progress">قيد المعالجة</string>
+    <string name="completed">مكتمل</string>
+    <string name="canceled">ملغي</string>
+    <string name="this_month">هذا الشهر</string>
+    <string name="previous_month">الشهر الماضي</string>
+    <string name="custom_month">شهر مخصص…</string>
+    <string name="clear_all">مسح الكل</string>
+    <string name="select_month_title">اختر الشهر</string>
+    <string name="new_patient_title">مريض جديد</string>
+    <string name="new_patient_subtitle">تسجيل مريض جديد مع إمكانية إنشاء بطاقة إجراء.</string>
+    <string name="patient_information">معلومات المريض</string>
+    <string name="medical_alerts">تنبيهات طبية</string>
+    <string name="initial_procedure">الإجراء الأولي (اختياري)</string>
+    <string name="treatment_steps">خطوات العلاج</string>
+    <string name="treatment_steps_description">أضف سير العمل السريري المخطط لهذا الإجراء.</string>
+    <string name="register_patient">تسجيل المريض</string>
+    <string name="no_patients_title">لا يوجد مرضى بعد</string>
+    <string name="no_patients_subtitle">اضغط على زر + لإضافة مريض جديد.</string>
+    <string name="no_matching_title">لا يوجد مرضى مطابقون</string>
+    <string name="no_matching_subtitle">حسّن بحثك أو مرشحاتك.</string>
+    <string name="systemic_condition_label">حالة مرضية</string>
+    <string name="allergies_label">الحساسية</string>
+    <string name="dental_history">تاريخ الأسنان:</string>
+    <string name="procedures_label">الإجراءات</string>
+    <string name="medical_alert">تنبيه طبي</string>
+    <plurals name="patients_count">
+        <item quantity="zero">لا يوجد مرضى</item>
+        <item quantity="one">مريض واحد</item>
+        <item quantity="two">مريضان</item>
+        <item quantity="few">%d مرضى</item>
+        <item quantity="many">%d مريضاً</item>
+        <item quantity="other">%d مريض</item>
+    </plurals>
+
+    <!-- Patient Portal -->
+    <string name="treatment_portal">بوابة العلاج</string>
+    <string name="medical_file_tab">الملف الطبي</string>
+    <string name="next_appointment_title">الموعد القادم</string>
+    <string name="next_appointment_date_label">تاريخ الموعد القادم</string>
+    <string name="appointment_time_label">وقت الموعد</string>
+    <string name="next_appointment_notes">ملاحظات الموعد القادم</string>
+    <string name="appointment_notes_placeholder">ملاحظات للزيارة القادمة…</string>
+    <string name="save_next_appointment">حفظ الموعد القادم</string>
+    <string name="next_treatment_step">خطوة العلاج التالية</string>
+    <string name="no_appointment_scheduled">لم يتم جدولة موعد</string>
+    <string name="schedule_next">جدولة الموعد القادم</string>
+
+    <!-- Payment Summary -->
+    <string name="payment_summary">ملخص الدفعات</string>
+    <string name="total_fees">إجمالي الرسوم</string>
+    <string name="total_paid">إجمالي المدفوع</string>
+    <string name="remaining_balance">الرصيد المتبقي</string>
+    <string name="fully_paid">مدفوع بالكامل ✓</string>
+    <string name="payment_history">سجل الدفعات</string>
+    <plurals name="more_count">
+        <item quantity="zero">لا يوجد المزيد</item>
+        <item quantity="one">+%d إضافي</item>
+        <item quantity="two">+%d إضافيان</item>
+        <item quantity="few">+%d إضافية</item>
+        <item quantity="many">+%d إضافياً</item>
+        <item quantity="other">+%d إضافي</item>
+    </plurals>
+
+    <!-- Add Procedure Card -->
+    <string name="add_procedure_card">إضافة بطاقة إجراء</string>
+    <string name="create_procedure_card">إنشاء بطاقة إجراء</string>
+    <string name="select_clinic_procedure">الشريك / العيادة</string>
+    <string name="select_type_label">النوع</string>
+    <string name="select_material_label">المادة</string>
+    <string name="tooth_label">رقم السن / الأسنان</string>
+    <string name="notes_label">ملاحظات</string>
+    <string name="add_systemic_condition">إضافة حالة مرضية</string>
+    <string name="add_allergy">إضافة حساسية</string>
+    <string name="delete_patient_record">حذف سجل المريض</string>
+    <string name="delete_patient_dialog_title">حذف سجل المريض؟</string>
+    <string name="delete_patient_dialog_body">سيؤدي هذا إلى حذف %s وجميع بطاقات الإجراءات نهائياً. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="add_alert_dialog_title">إضافة حالة مرضية</string>
+    <string name="save_alert">حفظ</string>
+    <string name="add_photo">إضافة صورة</string>
+    <string name="mark_in_progress">تحديد قيد المعالجة</string>
+    <string name="mark_completed">تحديد مكتمل</string>
+    <string name="mark_all_complete">تحديد كمكتمل</string>
+    <string name="mark_all_incomplete">تحديد كغير مكتمل</string>
+    <string name="financial_settings">▼ الإعدادات المالية</string>
+    <string name="financial_settings_collapsed">▸ الإعدادات المالية</string>
+    <string name="deduct_lab_fees">خصم رسوم المختبر قبل حساب الحصة</string>
+    <string name="payment_history_title">سجل الدفعات</string>
+    <string name="add_payment">إضافة دفعة</string>
+    <string name="financial_summary">الملخص المالي</string>
+    <string name="save_financial_settings">حفظ الإعدادات المالية</string>
+    <string name="delete_card_dialog_title">حذف بطاقة الإجراء؟</string>
+    <string name="delete_card_dialog_body">سيؤدي هذا إلى حذف بطاقة الإجراء هذه وجميع الخطوات المسجلة نهائياً. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="add_payment_dialog_title">إضافة دفعة</string>
+    <string name="no_cards_title">لا توجد بطاقات إجراءات</string>
+    <string name="no_cards_subtitle">استخدم النموذج أعلاه لإنشاء بطاقة إجراء جديدة.</string>
+    <string name="systemic_conditions_title">الحالات المرضية</string>
+    <string name="no_systemic_text">لا توجد حالات مرضية مسجلة.</string>
+    <string name="drug_allergies_title">حساسية الأدوية</string>
+    <string name="no_allergies_text">لا توجد حساسية أدوية مسجلة.</string>
+    <string name="remaining_steps">الخطوات المتبقية</string>
+    <string name="tap_to_complete">اضغط للإكمال</string>
+    <string name="treatment_fee_label">رسوم العلاج</string>
+    <string name="lab_fees_label">رسوم المختبر</string>
+    <string name="associate_share_label">حصة الشريك (%)</string>
+    <string name="amount_label">المبلغ</string>
+    <string name="payment_note_label">ملاحظة (اختياري)</string>
+    <string name="add_confirm">إضافة</string>
+
+    <!-- Content descriptions -->
+    <string name="cd_close_portal">إغلاق سجل المريض</string>
+    <string name="cd_pick_date">اختيار تاريخ</string>
+    <string name="cd_pick_time">اختيار وقت</string>
+    <string name="cd_remove_step">إزالة الخطوة</string>
+    <string name="cd_cancel_step">إلغاء</string>
+    <string name="cd_insert_step">إدراج خطوة هنا</string>
+    <string name="cd_confirm_step">تأكيد</string>
+    <string name="cd_add_step">إضافة خطوة</string>
+    <string name="cd_photo_preview">معاينة الصورة</string>
+    <string name="cd_close_preview">إغلاق المعاينة</string>
+    <string name="cd_collapse_card">طي</string>
+    <string name="cd_expand_card">توسيع</string>
+    <string name="cd_delete_card">حذف بطاقة الإجراء</string>
+    <string name="cd_edit_date">تعديل التاريخ</string>
+    <string name="cd_completed_step">مكتمل</string>
+    <string name="cd_step_photo">صورة الخطوة</string>
+    <string name="cd_attach_photo">إرفاق صورة</string>
+    <string name="cd_post_step">نشر الخطوة</string>
+    <string name="cd_main_menu">القائمة الرئيسية</string>
+    <string name="cd_templates_library">مكتبة القوالب</string>
+    <string name="cd_create_patient">إنشاء ملف مريض</string>
+    <string name="cd_filter">تصفية</string>
+    <string name="cd_empty">فارغ</string>
+    <string name="cd_close_dialog">إغلاق</string>
+    <string name="cd_add_associate">إضافة شريك جديد</string>
+    <string name="cd_no_entries">لا توجد إدخالات</string>
+    <string name="cd_delete_item">حذف</string>
+    <string name="cd_close_library">إغلاق المكتبة</string>
+    <string name="cd_remove_type">إزالة النوع</string>
+    <string name="cd_remove_step_library">إزالة الخطوة</string>
+    <string name="cd_move_up">تحريك لأعلى</string>
+    <string name="cd_move_down">تحريك لأسفل</string>
+    <string name="cd_add_step_library">إضافة خطوة</string>
+    <string name="cd_add_type">إضافة نوع</string>
+    <string name="cd_delete_template">حذف القالب</string>
+    <string name="cd_edit_template">تعديل القالب</string>
+    <string name="cd_expand">توسيع</string>
+    <string name="cd_go_back">العودة</string>
+    <string name="cd_profile_photo">صورة الملف الشخصي</string>
+    <string name="cd_default_profile">الملف الشخصي الافتراضي</string>
+    <string name="cd_pick_photo">اختيار صورة</string>
+    <string name="cd_clinic_icon">عيادة</string>
+    <string name="cd_date_icon">تاريخ</string>
+    <string name="cd_phone_icon">هاتف</string>
+    <string name="cd_notes_icon">ملاحظات</string>
+    <string name="cd_schedule_appointment_fab">حجز موعد</string>
+
+    <!-- Placeholders -->
+    <string name="hint_search">أدخل اسم المريض…</string>
+    <string name="hint_patient_name">أدخل الاسم الأول والأخير للمريض…</string>
+    <string name="hint_phone">مثال: 555-0199…</string>
+    <string name="hint_systemic">مثال: سكري، ضغط دم</string>
+    <string name="hint_allergies">مثال: بنسلين، لاتكس، أدوية كبريتية…</string>
+    <string name="hint_step">أدخل الخطوة…</string>
+    <string name="hint_new_step">إضافة خطوة جديدة…</string>
+    <string name="hint_tooth">مثال: 14، 18، أو عام…</string>
+    <string name="hint_notes">أدخل أي تفاصيل تتعلق بهذا الإجراء…</string>
+    <string name="hint_appointment_notes">أدخل أي تفاصيل تتعلق بهذا الموعد…</string>
+    <string name="hint_clinic_name">مثال: د. سميث أو العيادة المركزية…</string>
+    <string name="hint_percentage">اتركه فارغاً للإدخال اليدوي</string>
+    <string name="hint_template_name">مثال: الإجراء المخصص الخاص بي</string>
+    <string name="hint_type_step">إضافة خطوة…</string>
+    <string name="hint_type_name">اسم النوع الجديد…</string>
+    <string name="hint_type_materials">المواد…</string>
+    <string name="hint_shared_step">وصف الخطوة…</string>
+    <string name="hint_shared_step_add">إضافة خطوة…</string>
+    <string name="hint_search_templates">البحث في القوالب…</string>
+    <string name="hint_dentist_name">أدخل اسمك…</string>
+    <string name="hint_bio">مثال: طبيب أسنان عام متخصص في علاج الجذور…</string>
+    <string name="hint_alert_value">مثال: سكري، ضغط دم</string>
+    <string name="hint_custom_step">تسجيل خطوة مخصصة</string>
+    <string name="hint_portal_notes">ملاحظات للزيارة القادمة…</string>
+    <string name="hint_portal_step">أدخل الخطوة…</string>
+
+    <!-- Placeholder display text for dropdowns -->
+    <string name="dropdown_select_clinic">اختر الشريك / العيادة</string>
+    <string name="dropdown_select_procedure">اختر الإجراء</string>
+    <string name="dropdown_select_type">اختر النوع</string>
+    <string name="dropdown_select_material">اختر المادة</string>
+
+    <!-- Clinics Screen -->
+    <string name="associates_title">الشركاء</string>
+    <string name="associates_subtitle">إضافة وإدارة أطباء الأسنان الشركاء أو العيادات التي تعمل معها.</string>
+    <string name="no_associates_title">لا يوجد شركاء أو عيادات مكونة</string>
+    <string name="no_associates_subtitle">أنشئ علامات شركاء أو عيادات جديدة باستخدام زر \'+\' لتنظيم جلسات عملك.</string>
+    <string name="add_associate_clinic">إضافة شريك / عيادة</string>
+    <string name="edit_associate_clinic">تعديل الشريك / العيادة</string>
+    <string name="deduct_lab_fees_first">خصم رسوم المختبر أولاً</string>
+    <string name="save_clinic">حفظ</string>
+    <string name="associate_clinic_name">اسم الشريك / العيادة</string>
+    <string name="default_share_percentage">نسبة الحصة الافتراضية (%)</string>
+    <string name="hint_clinic_name_input">مثال: د. سميث أو العيادة المركزية…</string>
+    <string name="hint_percentage_input">اتركه فارغاً للإدخال اليدوي</string>
+    <string name="manual_config">إعدادات يدوية</string>
+    <string name="manual_fee_handling">معالجة الرسوم يدوياً</string>
+
+    <!-- Procedures Library -->
+    <string name="procedures_library_title">مكتبة الإجراءات</string>
+    <string name="procedures_library_subtitle">إدارة قوالب الإجراءات والأنواع والخطوات</string>
+    <string name="new_template">قالب جديد</string>
+    <string name="no_templates_title">لا توجد قوالب إجراءات مطابقة</string>
+    <string name="no_templates_subtitle">اضغط \'قالب جديد\' لإنشاء إجراء مخصص.</string>
+    <string name="edit_template_title">تعديل قالب الإجراء</string>
+    <string name="create_template_title">إنشاء قالب إجراء مخصص</string>
+    <string name="has_types_checkbox">هذا الإجراء له أنواع (مثل: الفئة 1، الفئة 2)</string>
+    <string name="types_label">الأنواع:</string>
+    <string name="type_name_label">الاسم</string>
+    <string name="materials_label_plural">المواد (مفصولة بفاصلة)</string>
+    <string name="shared_steps_label">الخطوات المشتركة:</string>
+    <string name="steps_label">الخطوات:</string>
+    <string name="type_specific_steps">خطوات خاصة بالنوع:</string>
+    <string name="update_template">تحديث القالب</string>
+    <string name="save_template">حفظ القالب</string>
+    <string name="custom_badge">مخصص</string>
+    <string name="has_types_label">له أنواع</string>
+    <string name="steps_only_label">خطوات فقط</string>
+    <string name="procedure_name_label">اسم الإجراء</string>
+    <string name="all_filter">الكل</string>
+    <string name="no_steps_label">لا توجد خطوات محددة.</string>
+    <string name="procedure_materials_label">المواد: %s</string>
+
+    <!-- Analytics Screen -->
+    <string name="analytics_title">الإحصائيات</string>
+    <string name="analytics_subtitle">مراقبة حركة العيادة والعلاجات الشائعة والاتجاهات الشهرية</string>
+    <string name="clinic_traffic_tab">حركة العيادة</string>
+    <string name="treatment_trends_tab">اتجاهات العلاج</string>
+    <string name="monthly_clinic_activity">النشاط الشهري للعيادة</string>
+    <string name="activity_description">تصفية نشاط بطاقة الإجراء لعيادة مستهدفة أو عرض البيانات التراكمية.</string>
+    <string name="select_month_label">اختر الشهر:</string>
+    <string name="associate_clinic_analytics">الشريك / العيادة:</string>
+    <string name="all_filter_analytics">الكل</string>
+    <string name="financial_summary_title">الملخص المالي</string>
+    <string name="total_gross_revenue">إجمالي الإيرادات</string>
+    <string name="total_lab_fees_label">إجمالي رسوم المختبر</string>
+    <string name="associate_payout">مستحقات الشريك</string>
+    <string name="clinic_revenue">إيرادات العيادة</string>
+    <string name="ongoing_month_message">هذا الشهر لا يزال مستمراً. يتم عرض البيانات التراكمية الحالية حتى اليوم.</string>
+    <string name="treatment_trends_title">اتجاهات إجراءات العلاج</string>
+    <string name="trends_description">رسم اتجاهات حجم الإجراءات بمرور الوقت.</string>
+    <string name="select_procedure_label">اختر الإجراء:</string>
+    <string name="source_label">المصدر:</string>
+    <string name="all_source">الكل</string>
+    <string name="time_span_label">المدة الزمنية:</string>
+    <string name="one_month">شهر واحد</string>
+    <string name="three_months">3 أشهر</string>
+    <string name="six_months">6 أشهر</string>
+    <string name="procedures_per_month">بطاقات الإجراءات شهرياً</string>
+    <string name="patients_metric">المرضى</string>
+    <string name="patients_metric_subtitle">إجمالي المرضى المسجلين</string>
+    <string name="procedures_metric">الإجراءات</string>
+    <string name="procedures_metric_subtitle">إجمالي بطاقات الإجراءات</string>
+    <string name="one_year">سنة واحدة</string>
+    <string name="treatment_volumes_title">حجم العلاجات</string>
+    <string name="treatment_numbers_title">أعداد العلاجات</string>
+    <string name="treatment_status_title">حالة العلاج</string>
+    <string name="cards_created">العلاجات المنشأة</string>
+    <string name="treatment_volumes_subtitle">أكثر إجراء تسويه؟ هالتقسيمة توضح توزيع علاجاتك.</string>
+    <string name="treatment_numbers_subtitle">عدد مرضاك يزيد ولا يقل؟ المخطط الشهري يجاوبك.</string>
+    <string name="treatment_status_subtitle">كم مريض أكمل علاجه وكم تركه؟ المخطط يوضحلك.</string>
+    <string name="general_exam_statement">في هذه الفترة، %1$d مريضاً من أصل %2$d مريضاً خضعوا لفحص عام بدون علاجات أخرى.</string>
+
+    <!-- Seed Procedure Name Translations -->
+    <string name="proc_endodontic_tt">علاج العصب</string>
+    <string name="proc_fixed_prosthodontic_tt">التركيبات الثابتة</string>
+    <string name="proc_removable_prosthodontic_tt">التركيبات المتحركة</string>
+    <string name="proc_oral_surgery">جراحة الفم</string>
+    <string name="proc_periodontic_tt">علاج اللثة</string>
+    <string name="proc_operative_tt">علاج الحشوات</string>
+    <string name="proc_pedodontics_tt">علاج أسنان الأطفال</string>
+    <string name="proc_general_examination">فحص عام</string>
+
+    <!-- Theme -->
+    <string name="theme_label">المظهر</string>
+    <string name="theme_system">تلقائي</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+
+    <!-- Profile Screen -->
+    <string name="dentist_profile">الملف الشخصي</string>
+    <string name="save_profile">حفظ الملف الشخصي</string>
+    <string name="upload_hint">اضغط على الدائرة لرفع صورة الملف الشخصي</string>
+    <string name="dentist_name_label">اسم الطبيب</string>
+    <string name="bio_label">السيرة الذاتية (اختياري)</string>
+
+    <!-- Details fields -->
+    <string name="systemic_conditions_field">الحالات المرضية</string>
+    <string name="drug_allergies_field">حساسية الأدوية</string>
+    <string name="procedure_notes_field">ملاحظات الإجراء</string>
+    <string name="clinical_procedure_field">الإجراء السريري</string>
+    <string name="type_field">النوع</string>
+    <string name="material_field">المادة</string>
+
+    <!-- Template Editor Fees -->
+    <string name="default_fee">الرسوم الافتراضية</string>
+    <string name="default_lab_fee">رسوم المختبر الافتراضية</string>
+    <string name="fee">الرسوم</string>
+    <string name="lab_fee">رسوم المختبر</string>
+    <string name="material_pricing">تسعير المواد:</string>
+    <string name="cd_delete_payment">حذف الدفعة</string>
+
+    <!-- Missing strings for PatientPortalDialog -->
+    <string name="phone_label">الهاتف: %s</string>
+    <string name="medical_alerts_pending">تنبيهات طبية معلقة</string>
+    <string name="health_record_safe">السجل الصحي آمن</string>
+    <string name="no_payments_recorded">لا توجد دفعات مسجلة</string>
+    <string name="no_steps_recorded">لا توجد خطوات مسجلة</string>
+    <string name="no_pending_treatment_steps">لا توجد خطوات علاج معلقة</string>
+    <string name="finance">المالية</string>
+    <string name="payments_section">الدفعات</string>
+    <string name="financial_settings_saved">تم حفظ الإعدادات المالية</string>
+    <string name="delete_payment_dialog_title">حذف الدفعة</string>
+    <string name="delete_payment_dialog_body">حذف دفعة بقيمة $%s؟</string>
+    <string name="create">إنشاء</string>
+    <string name="next_step_text">التالي: %1$s — %2$s</string>
+    <string name="paid_text">المدفوع: $%1$s / $%2$s</string>
+    <string name="condition">الحالة</string>
+    <string name="allergy">الحساسية</string>
+    <string name="percent_paid">تم دفع %d%%</string>
+    <string name="hint_time">مثال: 10:30 صباحاً</string>
+    <string name="no_payments_yet">لا توجد دفعات مسجلة بعد.</string>
+    <string name="delete_payment_of">حذف دفعة بقيمة $%s؟</string>
+    <string name="systemic_condition_label_single">الحالة</string>
+    <string name="allergy_label_single">الحساسية</string>
+    <string name="create_button">إنشاء</string>
+    <string name="existing_patient">مريض موجود</string>
+    <string name="select_existing_patient">اختيار مريض موجود</string>
+    <string name="search_hint">البحث بالاسم أو الهاتف</string>
+    <string name="schedule_for">جدولة لـ %s</string>
+</resources>
