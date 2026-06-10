@@ -1,18 +1,181 @@
-*.iml
-.gradle
-.kotlin
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+# =============================================================================
+# DentSched — .gitignore
+# Stack: Android (Kotlin + Jetpack Compose) + React (TypeScript) + Supabase
+# =============================================================================
+
+
+# =============================================================================
+# SECRETS & ENVIRONMENT — never commit these
+# =============================================================================
 .env
-debug.keystore
+.env.*
+!.env.example
+*.keystore
+*.jks
+keystore.properties
+google-services.json
+supabase/.env
+supabase/config.toml.local
+
+
+# =============================================================================
+# ANDROID
+# =============================================================================
+
+# Gradle
+.gradle/
+build/
+**/build/
+local.properties
+*.iml
+
+# Android Studio
+.idea/
+*.iml
+.DS_Store
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Generated
+app/src/main/assets/webkit/
+app/google-services.json
+
+# Release / signing
+release/
+*.apk
+*.aab
+
+
+# =============================================================================
+# REACT / WEB
+# =============================================================================
+
+# Dependencies
+web/node_modules/
+node_modules/
+
+# Build output
+web/dist/
+web/build/
+web/.next/
+web/out/
+
+# Environment
+web/.env
+web/.env.*
+!web/.env.example
+
+# Cache
+web/.cache/
+web/.parcel-cache/
+web/.turbo/
+
+# Vite
+web/.vite/
+
+# TypeScript
+*.tsbuildinfo
+web/tsconfig.tsbuildinfo
+
+
+# =============================================================================
+# SUPABASE
+# =============================================================================
+
+# Local dev state
+supabase/.branches/
+supabase/.temp/
+
+# Keep these (migrations and seed are source of truth)
+!supabase/migrations/
+!supabase/seed.sql
+!supabase/config.toml
+
+
+# =============================================================================
+# SYSTEM & EDITOR
+# =============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# JetBrains / IntelliJ / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Vim / Emacs
+*.swp
+*.swo
+*~
+\#*\#
+.#*
+
+
+# =============================================================================
+# LOGS & TEMP
+# =============================================================================
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+tmp/
+temp/
+.tmp/
+
+
+# =============================================================================
+# TESTING
+# =============================================================================
+coverage/
+web/coverage/
+*.lcov
+.nyc_output/
+
+
+# =============================================================================
+# MISC
+# =============================================================================
+
+# Package manager locks — commit only one, ignore the others
+# (uncomment the one you're NOT using)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Large binary assets (store in Supabase Storage or Git LFS instead)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+*.pdf
+!**/res/**/*.png
+!**/res/**/*.jpg
+!web/public/**
+!docs/**
