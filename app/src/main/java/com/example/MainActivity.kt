@@ -49,8 +49,12 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import coil.compose.AsyncImage
 import com.example.data.LocalePreferences
+import com.example.data.SessionManager
 import com.example.data.ThemePreferences
 import com.example.ui.DentistViewModel
+import com.example.ui.auth.AuthViewModel
+import com.example.ui.auth.AuthUiState
+import com.example.ui.auth.LoginScreen
 import com.example.ui.screens.AnalyticsScreen
 import com.example.ui.screens.ClinicsScreen
 import com.example.ui.screens.PatientsScreen
@@ -108,7 +112,31 @@ fun MainAppScreen(
     localePreferences: LocalePreferences,
     themePreferences: ThemePreferences
 ) {
+    val authViewModel: AuthViewModel = viewModel()
+    val authUiState by authViewModel.uiState.collectAsState()
     var showSplash by remember { mutableStateOf(true) }
+    var sessionRestored by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        authViewModel.restoreSession()
+        sessionRestored = true
+    }
+
+    if (!sessionRestored) {
+        SplashScreen(onSplashComplete = { showSplash = false })
+        return
+    }
+
+    val session by SessionManager.currentSession.collectAsState()
+    val isLoggedIn = session != null
+
+    if (!isLoggedIn && authUiState !is AuthUiState.Success) {
+        LoginScreen(
+            onLoginSuccess = { },
+            viewModel = authViewModel
+        )
+        return
+    }
 
     if (showSplash) {
         SplashScreen(onSplashComplete = { showSplash = false })
@@ -304,7 +332,15 @@ fun MainAppScreen(
                                 themePreferences.setThemeMode(mode)
                             }
                         },
-                        onBack = { navController.popBackStack() }
+                        onBack = { navController.popBackStack() },
+                        onSignOut = {
+                            authViewModel.signOut()
+                            scope.launch {
+                                navController.navigate(NavigationItem.Schedule.route) {
+                                    popUpTo(0) { inclusive = true }
+                                }
+                            }
+                        }
                     )
                 }
             }
