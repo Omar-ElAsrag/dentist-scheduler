@@ -24,7 +24,8 @@ fun SettingsScreen(
     onLanguageChange: (String) -> Unit,
     currentThemeMode: String,
     onThemeModeChange: (String) -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onSignOut: () -> Unit = {}
 ) {
     Scaffold(
         topBar = {
@@ -122,6 +123,18 @@ fun SettingsScreen(
                         }
                     }
                 }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
+            OutlinedButton(
+                onClick = onSignOut,
+                modifier = Modifier.fillMaxWidth(),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.error
+                )
+            ) {
+                Text("Sign Out", fontWeight = FontWeight.Bold)
             }
         }
     }
