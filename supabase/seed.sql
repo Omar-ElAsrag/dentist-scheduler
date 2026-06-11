@@ -1,0 +1,3 @@
+-- DentSched seed data
+-- This file will contain seed data for the development environment.
+-- To be populated in KIT-02 (Supabase Project Setup & Schema).
