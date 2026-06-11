@@ -63,6 +63,7 @@ import com.example.ui.screens.ProfileScreen
 import com.example.ui.screens.ProceduresLibraryDialog
 import com.example.ui.screens.SettingsScreen
 import com.example.ui.screens.SplashScreen
+import com.example.ui.components.RoleGate
 import com.example.ui.theme.MyApplicationTheme
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -155,12 +156,19 @@ fun MainAppScreen(
 
     val currentLanguage by localePreferences.languageFlow.collectAsState(initial = "en")
 
+    val role by SessionManager.role.collectAsState()
+
     val navItems = listOf(
         NavigationItem.Schedule,
         NavigationItem.Patients,
         NavigationItem.Analytics,
         NavigationItem.Clinics
-    )
+    ).filter { item ->
+        when (item) {
+            NavigationItem.Analytics -> role == "admin"
+            else -> true
+        }
+    }
 
     if (showLibraryDialog) {
         ProceduresLibraryDialog(
@@ -301,7 +309,13 @@ fun MainAppScreen(
                     popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) + fadeIn() },
                     popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) + fadeOut() }
                 ) {
-                    AnalyticsScreen(viewModel = viewModel)
+                    RoleGate(allowedRoles = setOf("admin"), fallbackContent = {
+                        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Text("You don't have permission to access this page.")
+                        }
+                    }) {
+                        AnalyticsScreen(viewModel = viewModel)
+                    }
                 }
                 composable(
                     route = NavigationItem.Clinics.route,

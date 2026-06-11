@@ -27,6 +27,7 @@ import com.example.R
 import com.example.data.Clinic
 import androidx.compose.ui.res.stringResource
 import com.example.ui.DentistViewModel
+import com.example.ui.components.RoleGate
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,13 +45,15 @@ fun ClinicsScreen(viewModel: DentistViewModel) {
 
     Scaffold(
         floatingActionButton = {
-            FloatingActionButton(
-                onClick = { showAddDialog = true },
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary,
-                modifier = Modifier.testTag("add_clinic_fab")
-            ) {
-                Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.cd_add_associate))
+            RoleGate(allowedRoles = setOf("admin")) {
+                FloatingActionButton(
+                    onClick = { showAddDialog = true },
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.testTag("add_clinic_fab")
+                ) {
+                    Icon(Icons.Filled.Add, contentDescription = stringResource(R.string.cd_add_associate))
+                }
             }
         }
     ) { paddingValues ->
@@ -389,19 +392,27 @@ fun ClinicItemRow(
             }
 
             Row {
-                IconButton(onClick = onEdit) {
-                    Icon(
-                        imageVector = Icons.Default.Edit,
-                        contentDescription = stringResource(R.string.cd_edit_template),
-                        tint = MaterialTheme.colorScheme.primary
+                RoleGate(allowedRoles = setOf("admin"), fallbackContent = {
+                    Text(
+                        text = "Admin access required.",
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-                }
-                IconButton(onClick = onDelete) {
-                    Icon(
-                        imageVector = Icons.Default.Delete,
-                        contentDescription = stringResource(R.string.cd_delete_item),
-                        tint = MaterialTheme.colorScheme.error.copy(0.8f)
-                    )
+                }) {
+                    IconButton(onClick = onEdit) {
+                        Icon(
+                            imageVector = Icons.Default.Edit,
+                            contentDescription = stringResource(R.string.cd_edit_template),
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    }
+                    IconButton(onClick = onDelete) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = stringResource(R.string.cd_delete_item),
+                            tint = MaterialTheme.colorScheme.error.copy(0.8f)
+                        )
+                    }
                 }
             }
         }
