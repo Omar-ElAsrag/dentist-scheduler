@@ -30,6 +30,7 @@ import com.example.R
 import androidx.compose.ui.res.stringResource
 import com.example.ui.DentistViewModel
 import com.example.ui.localizedProcedureName
+import com.example.ui.components.RoleGate
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -237,17 +238,19 @@ fun resetForm() {
                             singleLine = true
                         )
 
-                        Button(
-                            onClick = {
-                                resetForm()
-                                showCreatorForm = true
-                            },
-                            shape = RoundedCornerShape(12.dp),
-                            modifier = Modifier.testTag("create_procedure_button")
-                        ) {
-                            Icon(Icons.Default.Add, contentDescription = null)
-                            Spacer(Modifier.width(4.dp))
-                            Text(stringResource(R.string.new_template), style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+                        RoleGate(allowedRoles = setOf("admin")) {
+                            Button(
+                                onClick = {
+                                    resetForm()
+                                    showCreatorForm = true
+                                },
+                                shape = RoundedCornerShape(12.dp),
+                                modifier = Modifier.testTag("create_procedure_button")
+                            ) {
+                                Icon(Icons.Default.Add, contentDescription = null)
+                                Spacer(Modifier.width(4.dp))
+                                Text(stringResource(R.string.new_template), style = MaterialTheme.typography.bodySmall, fontWeight = FontWeight.Bold)
+                            }
                         }
                     }
 
@@ -843,23 +846,25 @@ fun ProcedureTemplateCard(
                 }
 
                 Row {
-                    if (procedure.isCustom) {
-                        IconButton(onClick = onDelete) {
+                    RoleGate(allowedRoles = setOf("admin")) {
+                        if (procedure.isCustom) {
+                            IconButton(onClick = onDelete) {
+                                Icon(
+                                    imageVector = Icons.Default.Delete,
+                                    contentDescription = stringResource(R.string.cd_delete_template),
+                                    tint = MaterialTheme.colorScheme.error,
+                                    modifier = Modifier.size(20.dp)
+                                )
+                            }
+                        }
+                        IconButton(onClick = onEdit) {
                             Icon(
-                                imageVector = Icons.Default.Delete,
-                                contentDescription = stringResource(R.string.cd_delete_template),
-                                tint = MaterialTheme.colorScheme.error,
+                                imageVector = Icons.Default.Edit,
+                                contentDescription = stringResource(R.string.cd_edit_template),
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(20.dp)
                             )
                         }
-                    }
-                    IconButton(onClick = onEdit) {
-                        Icon(
-                            imageVector = Icons.Default.Edit,
-                                contentDescription = stringResource(R.string.cd_edit_template),
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(20.dp)
-                        )
                     }
                     IconButton(onClick = onToggleExpand) {
                         Icon(
