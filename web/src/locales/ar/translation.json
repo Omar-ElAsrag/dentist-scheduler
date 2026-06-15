@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "patients": "المرضى",
+    "schedule": "المواعيد",
+    "procedures": "الإجراءات",
+    "analytics": "التحليلات",
+    "associates": "الشركاء",
+    "settings": "الإعدادات"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "loginError": "البريد الإلكتروني أو كلمة المرور غير صحيحة"
+  },
+  "header": {
+    "languageToggle": "English",
+    "greeting": "مرحباً"
+  }
+}
