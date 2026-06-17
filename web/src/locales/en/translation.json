@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "patients": "Patients",
+    "schedule": "Schedule",
+    "procedures": "Procedures",
+    "analytics": "Analytics",
+    "associates": "Associates",
+    "settings": "Settings"
+  },
+  "auth": {
+    "login": "Log In",
+    "logout": "Log Out",
+    "email": "Email",
+    "password": "Password",
+    "loginError": "Invalid email or password"
+  },
+  "header": {
+    "languageToggle": "عربي",
+    "greeting": "Welcome"
+  }
+}
