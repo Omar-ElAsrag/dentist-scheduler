@@ -38,6 +38,7 @@ import com.example.data.*
 import com.example.ui.DentistViewModel
 import com.example.ui.localizedProcedureName
 import com.example.ui.components.AppCard
+import com.example.ui.components.RoleGate
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.LocalDate
@@ -301,18 +302,20 @@ fun PatientPortalDialog(
                                 }
 
                                 Spacer(Modifier.height(16.dp))
-                                OutlinedButton(
-                                    onClick = {
-                                        dialogAppointmentDate = patient.nextAppointmentDate
-                                        dialogAppointmentTime = patient.nextAppointmentTime
-                                        dialogAppointmentNotes = patient.nextAppointmentNotes
-                                        showScheduleAppointmentDialog = true
-                                    },
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Icon(Icons.Default.CalendarMonth, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(Modifier.width(6.dp))
-                                    Text(stringResource(R.string.schedule_next), fontWeight = FontWeight.Bold)
+                                RoleGate(allowedRoles = setOf("admin", "receptionist")) {
+                                    OutlinedButton(
+                                        onClick = {
+                                            dialogAppointmentDate = patient.nextAppointmentDate
+                                            dialogAppointmentTime = patient.nextAppointmentTime
+                                            dialogAppointmentNotes = patient.nextAppointmentNotes
+                                            showScheduleAppointmentDialog = true
+                                        },
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Icon(Icons.Default.CalendarMonth, contentDescription = null, modifier = Modifier.size(16.dp))
+                                        Spacer(Modifier.width(6.dp))
+                                        Text(stringResource(R.string.schedule_next), fontWeight = FontWeight.Bold)
+                                    }
                                 }
                             }
 
@@ -397,14 +400,24 @@ fun PatientPortalDialog(
                                 }
                             }
 
-                            Spacer(Modifier.height(16.dp))
-                            OutlinedButton(
-                                onClick = { showAddCardDialog = true },
-                                modifier = Modifier.fillMaxWidth()
-                            ) {
-                                Icon(Icons.Default.AddCircle, contentDescription = null, modifier = Modifier.size(16.dp))
-                                Spacer(Modifier.width(6.dp))
-                                Text(stringResource(R.string.add_procedure_card), fontWeight = FontWeight.Bold)
+                            RoleGate(allowedRoles = setOf("admin", "dentist"), fallbackContent = {
+                                Spacer(Modifier.height(16.dp))
+                                Text(
+                                    text = "Requires dentist or admin access.",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    modifier = Modifier.fillMaxWidth()
+                                )
+                            }) {
+                                Spacer(Modifier.height(16.dp))
+                                OutlinedButton(
+                                    onClick = { showAddCardDialog = true },
+                                    modifier = Modifier.fillMaxWidth()
+                                ) {
+                                    Icon(Icons.Default.AddCircle, contentDescription = null, modifier = Modifier.size(16.dp))
+                                    Spacer(Modifier.width(6.dp))
+                                    Text(stringResource(R.string.add_procedure_card), fontWeight = FontWeight.Bold)
+                                }
                             }
 
                             Spacer(modifier = Modifier.height(12.dp))
@@ -453,15 +466,17 @@ fun PatientPortalDialog(
                             Spacer(modifier = Modifier.height(16.dp))
                             HorizontalDivider(color = MaterialTheme.colorScheme.error.copy(alpha = 0.3f))
                             Spacer(modifier = Modifier.height(8.dp))
-                            OutlinedButton(
-                                onClick = { showDeletePatientConfirm = true },
-                                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFB71C1C)),
-                                border = BorderStroke(1.dp, Color(0xFFB71C1C)),
-                                modifier = Modifier.fillMaxWidth().testTag("delete_patient_button")
-                            ) {
-                                Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(stringResource(R.string.delete_patient_record), fontWeight = FontWeight.Bold)
+                            RoleGate(allowedRoles = setOf("admin")) {
+                                OutlinedButton(
+                                    onClick = { showDeletePatientConfirm = true },
+                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFB71C1C)),
+                                    border = BorderStroke(1.dp, Color(0xFFB71C1C)),
+                                    modifier = Modifier.fillMaxWidth().testTag("delete_patient_button")
+                                ) {
+                                    Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
+                                    Spacer(modifier = Modifier.width(6.dp))
+                                    Text(stringResource(R.string.delete_patient_record), fontWeight = FontWeight.Bold)
+                                }
                             }
                             Spacer(modifier = Modifier.height(8.dp))
                             HorizontalDivider(color = MaterialTheme.colorScheme.error.copy(alpha = 0.3f))
@@ -502,21 +517,23 @@ fun PatientPortalDialog(
                                                     style = MaterialTheme.typography.bodyMedium,
                                                     modifier = Modifier.weight(1f)
                                                 )
-                                                IconButton(
-                                                    onClick = {
-                                                        val lines = systemicField.split("\n").filter { it.isNotBlank() }.toMutableList()
-                                                        lines.remove(condition)
-                                                        systemicField = lines.joinToString("\n")
-                                                        viewModel.updatePatient(patient.copy(systemicConditions = systemicField))
-                                                    },
-                                                    modifier = Modifier.size(24.dp)
-                                                ) {
-                                                    Icon(
-                                                        Icons.Default.Close,
-                                                        contentDescription = stringResource(R.string.cd_delete_item),
-                                                        modifier = Modifier.size(18.dp),
-                                                        tint = MaterialTheme.colorScheme.error
-                                                    )
+                                                RoleGate(allowedRoles = setOf("admin", "dentist")) {
+                                                    IconButton(
+                                                        onClick = {
+                                                            val lines = systemicField.split("\n").filter { it.isNotBlank() }.toMutableList()
+                                                            lines.remove(condition)
+                                                            systemicField = lines.joinToString("\n")
+                                                            viewModel.updatePatient(patient.copy(systemicConditions = systemicField))
+                                                        },
+                                                        modifier = Modifier.size(24.dp)
+                                                    ) {
+                                                        Icon(
+                                                            Icons.Default.Close,
+                                                            contentDescription = stringResource(R.string.cd_delete_item),
+                                                            modifier = Modifier.size(18.dp),
+                                                            tint = MaterialTheme.colorScheme.error
+                                                        )
+                                                    }
                                                 }
                                             }
                                             if (index < conditions.size - 1) {
@@ -526,13 +543,15 @@ fun PatientPortalDialog(
                                     }
 
                                     Spacer(Modifier.height(16.dp))
-                                    OutlinedButton(
-                                        onClick = { showAddConditionDialog = true },
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
-                                        Spacer(Modifier.width(6.dp))
-                                        Text(stringResource(R.string.add_systemic_condition), fontWeight = FontWeight.Bold)
+                                    RoleGate(allowedRoles = setOf("admin", "dentist")) {
+                                        OutlinedButton(
+                                            onClick = { showAddConditionDialog = true },
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                                            Spacer(Modifier.width(6.dp))
+                                            Text(stringResource(R.string.add_systemic_condition), fontWeight = FontWeight.Bold)
+                                        }
                                     }
                                 }
                             }
@@ -570,21 +589,23 @@ fun PatientPortalDialog(
                                                     style = MaterialTheme.typography.bodyMedium,
                                                     modifier = Modifier.weight(1f)
                                                 )
-                                                IconButton(
-                                                    onClick = {
-                                                        val lines = allergiesField.split("\n").filter { it.isNotBlank() }.toMutableList()
-                                                        lines.remove(allergy)
-                                                        allergiesField = lines.joinToString("\n")
-                                                        viewModel.updatePatient(patient.copy(allergies = allergiesField))
-                                                    },
-                                                    modifier = Modifier.size(24.dp)
-                                                ) {
-                                                    Icon(
-                                                        Icons.Default.Close,
-                                                        contentDescription = stringResource(R.string.cd_delete_item),
-                                                        modifier = Modifier.size(18.dp),
-                                                        tint = MaterialTheme.colorScheme.error
-                                                    )
+                                                RoleGate(allowedRoles = setOf("admin", "dentist")) {
+                                                    IconButton(
+                                                        onClick = {
+                                                            val lines = allergiesField.split("\n").filter { it.isNotBlank() }.toMutableList()
+                                                            lines.remove(allergy)
+                                                            allergiesField = lines.joinToString("\n")
+                                                            viewModel.updatePatient(patient.copy(allergies = allergiesField))
+                                                        },
+                                                        modifier = Modifier.size(24.dp)
+                                                    ) {
+                                                        Icon(
+                                                            Icons.Default.Close,
+                                                            contentDescription = stringResource(R.string.cd_delete_item),
+                                                            modifier = Modifier.size(18.dp),
+                                                            tint = MaterialTheme.colorScheme.error
+                                                        )
+                                                    }
                                                 }
                                             }
                                             if (index < allergies.size - 1) {
@@ -594,28 +615,32 @@ fun PatientPortalDialog(
                                     }
 
                                     Spacer(Modifier.height(16.dp))
-                                    OutlinedButton(
-                                        onClick = { showAddAllergyDialog = true },
-                                        modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
-                                        Spacer(Modifier.width(6.dp))
-                                        Text(stringResource(R.string.add_allergy), fontWeight = FontWeight.Bold)
+                                    RoleGate(allowedRoles = setOf("admin", "dentist")) {
+                                        OutlinedButton(
+                                            onClick = { showAddAllergyDialog = true },
+                                            modifier = Modifier.fillMaxWidth()
+                                        ) {
+                                            Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                                            Spacer(Modifier.width(6.dp))
+                                            Text(stringResource(R.string.add_allergy), fontWeight = FontWeight.Bold)
+                                        }
                                     }
                                 }
                             }
                             item {
                                 HorizontalDivider(color = MaterialTheme.colorScheme.error.copy(alpha = 0.3f))
                                 Spacer(modifier = Modifier.height(8.dp))
-                                OutlinedButton(
-                                    onClick = { showDeletePatientConfirm = true },
-                                    colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFB71C1C)),
-                                    border = BorderStroke(1.dp, Color(0xFFB71C1C)),
-                                    modifier = Modifier.fillMaxWidth().testTag("delete_patient_button")
-                                ) {
-                                    Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
-                                    Spacer(modifier = Modifier.width(6.dp))
-                                    Text(stringResource(R.string.delete_patient_record), fontWeight = FontWeight.Bold)
+                                RoleGate(allowedRoles = setOf("admin")) {
+                                    OutlinedButton(
+                                        onClick = { showDeletePatientConfirm = true },
+                                        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFB71C1C)),
+                                        border = BorderStroke(1.dp, Color(0xFFB71C1C)),
+                                        modifier = Modifier.fillMaxWidth().testTag("delete_patient_button")
+                                    ) {
+                                        Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(stringResource(R.string.delete_patient_record), fontWeight = FontWeight.Bold)
+                                    }
                                 }
                                 Spacer(modifier = Modifier.height(8.dp))
                                 HorizontalDivider(color = MaterialTheme.colorScheme.error.copy(alpha = 0.3f))
@@ -1142,6 +1167,8 @@ fun ProcedureCardSection(
     var expanded by remember { mutableStateOf(false) }
     val stepsFlow = remember(cardDetail.id) { viewModel.getStepsForCard(cardDetail.id) }
     val cardSteps by stepsFlow.collectAsState(initial = emptyList())
+    val role by SessionManager.role.collectAsState()
+    val canEditFinancials = role == "admin"
 
     var newStepDesc by remember { mutableStateOf("") }
     var targetStepForPhoto by remember { mutableStateOf<ProcedureCardStep?>(null) }
@@ -1440,7 +1467,8 @@ fun ProcedureCardSection(
                     onValueChange = { finTreatmentFee = it },
                     label = { Text(stringResource(R.string.treatment_fee_label)) },
                     modifier = Modifier.fillMaxWidth(),
-                    singleLine = true
+                    singleLine = true,
+                    enabled = canEditFinancials
                 )
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
@@ -1448,7 +1476,8 @@ fun ProcedureCardSection(
                     onValueChange = { finLabFees = it },
                     label = { Text(stringResource(R.string.lab_fees_label)) },
                     modifier = Modifier.fillMaxWidth(),
-                    singleLine = true
+                    singleLine = true,
+                    enabled = canEditFinancials
                 )
                 Spacer(Modifier.height(8.dp))
                 OutlinedTextField(
@@ -1456,11 +1485,12 @@ fun ProcedureCardSection(
                     onValueChange = { finPercentage = it },
                     label = { Text(stringResource(R.string.associate_share_label)) },
                     modifier = Modifier.fillMaxWidth(),
-                    singleLine = true
+                    singleLine = true,
+                    enabled = canEditFinancials
                 )
                 Spacer(Modifier.height(4.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Checkbox(checked = finDeduct, onCheckedChange = { finDeduct = it })
+                    Checkbox(checked = finDeduct, onCheckedChange = { finDeduct = it }, enabled = canEditFinancials)
                     Spacer(Modifier.width(8.dp))
                     Text(stringResource(R.string.deduct_lab_fees), style = MaterialTheme.typography.bodySmall)
                 }

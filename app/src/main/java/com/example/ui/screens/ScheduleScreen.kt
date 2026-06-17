@@ -32,6 +32,7 @@ import com.example.R
 import com.example.data.*
 import com.example.ui.DentistViewModel
 import com.example.ui.components.AppCard
+import com.example.ui.components.RoleGate
 import com.example.ui.localizedProcedureName
 import kotlinx.coroutines.launch
 import java.time.Instant
@@ -78,45 +79,47 @@ fun ScheduleScreen(viewModel: DentistViewModel) {
 
     Scaffold(
         floatingActionButton = {
-            Box {
-                Column(horizontalAlignment = Alignment.End) {
-                    AnimatedVisibility(visible = fabExpanded, enter = fadeIn() + slideInVertically { it }, exit = fadeOut() + slideOutVertically { it }) {
-                        Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                            FloatingActionButton(
-                                onClick = {
-                                    fabExpanded = false
-                                    showExistingPatientSearch = true
-                                },
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(Icons.Default.Person, contentDescription = stringResource(R.string.existing_patient), modifier = Modifier.size(18.dp))
-                            }
-                            FloatingActionButton(
-                                onClick = {
-                                    fabExpanded = false
-                                    showAddDialog = true
-                                },
-                                containerColor = MaterialTheme.colorScheme.secondaryContainer,
-                                contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
-                                modifier = Modifier.size(40.dp)
-                            ) {
-                                Icon(Icons.Default.PersonAdd, contentDescription = stringResource(R.string.new_patient_title), modifier = Modifier.size(18.dp))
+            RoleGate(allowedRoles = setOf("admin", "receptionist")) {
+                Box {
+                    Column(horizontalAlignment = Alignment.End) {
+                        AnimatedVisibility(visible = fabExpanded, enter = fadeIn() + slideInVertically { it }, exit = fadeOut() + slideOutVertically { it }) {
+                            Column(horizontalAlignment = Alignment.End, verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                FloatingActionButton(
+                                    onClick = {
+                                        fabExpanded = false
+                                        showExistingPatientSearch = true
+                                    },
+                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Icon(Icons.Default.Person, contentDescription = stringResource(R.string.existing_patient), modifier = Modifier.size(18.dp))
+                                }
+                                FloatingActionButton(
+                                    onClick = {
+                                        fabExpanded = false
+                                        showAddDialog = true
+                                    },
+                                    containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                                    contentColor = MaterialTheme.colorScheme.onSecondaryContainer,
+                                    modifier = Modifier.size(40.dp)
+                                ) {
+                                    Icon(Icons.Default.PersonAdd, contentDescription = stringResource(R.string.new_patient_title), modifier = Modifier.size(18.dp))
+                                }
                             }
                         }
-                    }
-                    Spacer(Modifier.height(8.dp))
-                    FloatingActionButton(
-                        onClick = { fabExpanded = !fabExpanded },
-                        containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier.testTag("add_patient_schedule_fab")
-                    ) {
-                        Icon(
-                            imageVector = if (fabExpanded) Icons.Default.Close else Icons.Default.Add,
-                            contentDescription = stringResource(R.string.cd_schedule_appointment_fab)
-                        )
+                        Spacer(Modifier.height(8.dp))
+                        FloatingActionButton(
+                            onClick = { fabExpanded = !fabExpanded },
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary,
+                            modifier = Modifier.testTag("add_patient_schedule_fab")
+                        ) {
+                            Icon(
+                                imageVector = if (fabExpanded) Icons.Default.Close else Icons.Default.Add,
+                                contentDescription = stringResource(R.string.cd_schedule_appointment_fab)
+                            )
+                        }
                     }
                 }
             }
