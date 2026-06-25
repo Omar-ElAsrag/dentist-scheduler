@@ -17,5 +17,74 @@
   "header": {
     "languageToggle": "English",
     "greeting": "مرحباً"
+  },
+  "patients": {
+    "list": {
+      "title": "المرضى",
+      "searchPlaceholder": "البحث بالاسم...",
+      "allClinics": "جميع العيادات",
+      "allDentists": "جميع الأطباء",
+      "allStatus": "جميع الحالات",
+      "newPatient": "مريض جديد",
+      "name": "الاسم",
+      "clinic": "العيادة",
+      "dentist": "الطبيب",
+      "status": "الحالة",
+      "noSearchResults": "لا يوجد مرضى يطابقون بحثك.",
+      "empty": "لا يوجد مرضى حتى الآن. أضف أول مريض.",
+      "loadError": "فشل تحميل المرضى. حاول مرة أخرى.",
+      "retry": "إعادة المحاولة",
+      "previous": "السابق",
+      "next": "التالي",
+      "pageInfo": "صفحة {{page}} من {{total}}"
+    },
+    "detail": {
+      "title": "تفاصيل المريض",
+      "demographics": "البيانات الشخصية",
+      "medicalHistory": "التاريخ الطبي",
+      "systemicConditions": "الأمراض الجهازية",
+      "pastTreatments": "العلاجات السابقة",
+      "allergies": "الحساسية",
+      "generalNotes": "ملاحظات عامة",
+      "notFound": "المريض غير موجود.",
+      "delete": "حذف المريض",
+      "confirmDeleteTitle": "حذف المريض",
+      "confirmDeleteDescription": "هل أنت متأكد أنك تريد حذف هذا المريض؟ لا يمكن التراجع عن هذا الإجراء.",
+      "confirmDelete": "حذف",
+      "cancel": "إلغاء",
+      "tabs": {
+        "procedureCards": "بطاقات الإجراءات",
+        "appointments": "المواعيد",
+        "payments": "المدفوعات",
+        "medicalFiles": "الملفات الطبية"
+      }
+    },
+    "status": {
+      "active": "نشط",
+      "inactive": "غير نشط"
+    },
+    "form": {
+      "name": "الاسم",
+      "phone": "رقم الهاتف",
+      "dateOfBirth": "تاريخ الميلاد",
+      "gender": "الجنس",
+      "clinic": "العيادة",
+      "dentist": "الطبيب",
+      "selectClinic": "اختر العيادة...",
+      "selectDentist": "اختر الطبيب...",
+      "cancel": "إلغاء",
+      "save": "حفظ",
+      "create": "إضافة مريض",
+      "editDemographics": "تعديل البيانات الشخصية",
+      "editMedicalHistory": "تعديل التاريخ الطبي",
+      "editing": "تعديل",
+      "requiredField": "هذا الحقل مطلوب",
+      "saveSuccess": "تم حفظ المريض بنجاح.",
+      "createSuccess": "تم إنشاء المريض بنجاح.",
+      "saveError": "فشل الحفظ. حاول مرة أخرى.",
+      "permissionDenied": "ليس لديك صلاحية تعديل هذا الحقل.",
+      "male": "ذكر",
+      "female": "أنثى"
+    }
   }
 }

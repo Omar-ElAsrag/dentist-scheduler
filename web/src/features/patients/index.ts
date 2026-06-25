@@ -1,0 +1,8 @@
+export { default as PatientsPage } from './PatientsPage'
+export { default as PatientDetailPage } from './PatientDetailPage'
+export { default as NewPatientModal } from './NewPatientModal'
+export { default as EditDemographicsForm } from './EditDemographicsForm'
+export { default as EditMedicalHistoryForm } from './EditMedicalHistoryForm'
+export { default as PatientsFilters } from './PatientsFilters'
+export { default as PatientRow } from './PatientRow'
+export { default as PatientTabs } from './PatientTabs'

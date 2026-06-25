@@ -2,13 +2,13 @@ import { NavLink } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useAuth } from '../hooks/useAuth'
 
-const navItems = [
-  { labelKey: 'nav.patients', path: '/patients', roles: ['admin', 'dentist', 'receptionist'] as const },
-  { labelKey: 'nav.schedule', path: '/schedule', roles: ['admin', 'dentist', 'receptionist'] as const },
-  { labelKey: 'nav.procedures', path: '/procedures', roles: ['admin', 'dentist'] as const },
-  { labelKey: 'nav.analytics', path: '/analytics', roles: ['admin'] as const },
-  { labelKey: 'nav.associates', path: '/associates', roles: ['admin'] as const },
-  { labelKey: 'nav.settings', path: '/settings', roles: ['admin'] as const },
+const navItems: { labelKey: string; path: string; roles: string[] }[] = [
+  { labelKey: 'nav.patients', path: '/patients', roles: ['admin', 'dentist', 'receptionist'] },
+  { labelKey: 'nav.schedule', path: '/schedule', roles: ['admin', 'dentist', 'receptionist'] },
+  { labelKey: 'nav.procedures', path: '/procedures', roles: ['admin', 'dentist'] },
+  { labelKey: 'nav.analytics', path: '/analytics', roles: ['admin'] },
+  { labelKey: 'nav.associates', path: '/associates', roles: ['admin'] },
+  { labelKey: 'nav.settings', path: '/settings', roles: ['admin'] },
 ]
 
 interface SidebarProps {

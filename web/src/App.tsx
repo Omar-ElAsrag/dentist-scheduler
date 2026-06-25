@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
 import LoginPage from './pages/LoginPage'
 import PatientsPage from './features/patients/PatientsPage'
+import PatientDetailPage from './features/patients/PatientDetailPage'
 import SchedulePage from './features/schedule/SchedulePage'
 import ProceduresPage from './features/procedures/ProceduresPage'
 import AnalyticsPage from './features/analytics/AnalyticsPage'
@@ -36,7 +37,10 @@ export default function App() {
                 }
               >
                 <Route index element={<Dashboard />} />
-                <Route path="patients" element={<PatientsPage />} />
+                <Route path="patients">
+                  <Route index element={<PatientsPage />} />
+                  <Route path=":id" element={<PatientDetailPage />} />
+                </Route>
                 <Route path="schedule" element={<SchedulePage />} />
                 <Route path="procedures" element={<ProceduresPage />} />
                 <Route path="analytics" element={<AnalyticsPage />} />

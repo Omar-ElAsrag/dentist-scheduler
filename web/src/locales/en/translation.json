@@ -17,5 +17,74 @@
   "header": {
     "languageToggle": "عربي",
     "greeting": "Welcome"
+  },
+  "patients": {
+    "list": {
+      "title": "Patients",
+      "searchPlaceholder": "Search by name...",
+      "allClinics": "All Clinics",
+      "allDentists": "All Dentists",
+      "allStatus": "All Status",
+      "newPatient": "New Patient",
+      "name": "Name",
+      "clinic": "Clinic",
+      "dentist": "Dentist",
+      "status": "Status",
+      "noSearchResults": "No patients match your search.",
+      "empty": "No patients yet. Create your first patient.",
+      "loadError": "Failed to load patients. Please try again.",
+      "retry": "Try Again",
+      "previous": "Previous",
+      "next": "Next",
+      "pageInfo": "Page {{page}} of {{total}}"
+    },
+    "detail": {
+      "title": "Patient Details",
+      "demographics": "Demographics",
+      "medicalHistory": "Medical History",
+      "systemicConditions": "Systemic Conditions",
+      "pastTreatments": "Past Dental Treatments",
+      "allergies": "Allergies",
+      "generalNotes": "General Notes",
+      "notFound": "Patient not found.",
+      "delete": "Delete Patient",
+      "confirmDeleteTitle": "Delete Patient",
+      "confirmDeleteDescription": "Are you sure you want to delete this patient? This action cannot be undone.",
+      "confirmDelete": "Delete",
+      "cancel": "Cancel",
+      "tabs": {
+        "procedureCards": "Procedure Cards",
+        "appointments": "Appointments",
+        "payments": "Payments",
+        "medicalFiles": "Medical Files"
+      }
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "form": {
+      "name": "Name",
+      "phone": "Phone Number",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "clinic": "Clinic",
+      "dentist": "Dentist",
+      "selectClinic": "Select clinic...",
+      "selectDentist": "Select dentist...",
+      "cancel": "Cancel",
+      "save": "Save",
+      "create": "Create Patient",
+      "editDemographics": "Edit Demographics",
+      "editMedicalHistory": "Edit Medical History",
+      "editing": "Editing",
+      "requiredField": "This field is required",
+      "saveSuccess": "Patient saved successfully.",
+      "createSuccess": "Patient created successfully.",
+      "saveError": "Failed to save. Please try again.",
+      "permissionDenied": "You don't have permission to edit this field.",
+      "male": "Male",
+      "female": "Female"
+    }
   }
 }
