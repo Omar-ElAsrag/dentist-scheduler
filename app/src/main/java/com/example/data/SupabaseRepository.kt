@@ -1,6 +1,5 @@
 package com.example.data
 
-import io.github.jan.supabase.postgrest.query.filter.FilterOperator
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -8,6 +7,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import java.time.Instant
 
 @Serializable
@@ -232,18 +233,16 @@ class SupabaseRepository {
     private fun requireTenantId(): String = tenantId
         ?: throw IllegalStateException("No tenant ID available.")
 
-    private fun inFilter(ids: List<Int>): String = "(${ids.joinToString(",")})"
-
     // ─── Clinics ─────────────────────────────────────────────────────────────
 
     fun getClinics(): Flow<List<Clinic>> = flow {
         val tid = requireTenantId()
-        emit(postgrest.from("clinics").select { filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<Clinic>())
+        emit(postgrest.from("clinics").select { filter { eq("tenant_id", tid) } }.decodeList<Clinic>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun getClinicById(id: Int): Clinic? {
         val tid = requireTenantId()
-        return postgrest.from("clinics").select { filter("id", FilterOperator.EQ, id); filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<Clinic>().firstOrNull()
+        return postgrest.from("clinics").select { filter { eq("id", id); eq("tenant_id", tid) } }.decodeList<Clinic>().firstOrNull()
     }
 
     suspend fun insertClinic(clinic: Clinic): Int {
@@ -252,23 +251,23 @@ class SupabaseRepository {
     }
 
     suspend fun updateClinic(clinic: Clinic) {
-        postgrest.from("clinics").update(clinic) { filter("id", FilterOperator.EQ, clinic.id) }
+        postgrest.from("clinics").update(clinic) { filter { eq("id", clinic.id) } }
     }
 
     suspend fun deleteClinic(id: Int) {
-        postgrest.from("clinics").delete { filter("id", FilterOperator.EQ, id) }
+        postgrest.from("clinics").delete { filter { eq("id", id) } }
     }
 
     // ─── Patients ─────────────────────────────────────────────────────────────
 
     fun getPatients(): Flow<List<Patient>> = flow {
         val tid = requireTenantId()
-        emit(postgrest.from("patients").select { filter("tenant_id", FilterOperator.EQ, tid); filter("deleted_at", FilterOperator.IS, null) }.decodeList<Patient>())
+        emit(postgrest.from("patients").select { filter { eq("tenant_id", tid); exact("deleted_at", null) } }.decodeList<Patient>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun getPatientById(id: Int): Patient? {
         val tid = requireTenantId()
-        return postgrest.from("patients").select { filter("id", FilterOperator.EQ, id); filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<Patient>().firstOrNull()
+        return postgrest.from("patients").select { filter { eq("id", id); eq("tenant_id", tid) } }.decodeList<Patient>().firstOrNull()
     }
 
     fun getPatientByIdFlow(id: Int): Flow<Patient?> = flow {
@@ -281,11 +280,12 @@ class SupabaseRepository {
     }
 
     suspend fun updatePatient(patient: Patient) {
-        postgrest.from("patients").update(patient) { filter("id", FilterOperator.EQ, patient.id) }
+        val tid = requireTenantId()
+        postgrest.from("patients").update(patient) { filter { eq("id", patient.id); eq("tenant_id", tid) } }
     }
 
     suspend fun softDeletePatient(id: Int) {
-        postgrest.from("patients").update(mapOf("deleted_at" to Instant.now().toString())) { filter("id", FilterOperator.EQ, id) }
+        postgrest.rpc("soft_delete_patient", buildJsonObject { put("p_patient_id", id) })
     }
 
     suspend fun deletePatient(patient: Patient) {
@@ -296,20 +296,20 @@ class SupabaseRepository {
 
     fun getClinicalProcedures(): Flow<List<ClinicalProcedure>> = flow {
         val tid = requireTenantId()
-        val system = postgrest.from("clinical_procedures").select { filter("tenant_id", FilterOperator.IS, null) }.decodeList<ClinicalProcedure>()
-        val tenant = postgrest.from("clinical_procedures").select { filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<ClinicalProcedure>()
+        val system = postgrest.from("clinical_procedures").select { filter { exact("tenant_id", null) } }.decodeList<ClinicalProcedure>()
+        val tenant = postgrest.from("clinical_procedures").select { filter { eq("tenant_id", tid) } }.decodeList<ClinicalProcedure>()
         emit(system + tenant)
     }.flowOn(Dispatchers.IO)
 
     suspend fun getAllClinicalProceduresOnce(): List<ClinicalProcedure> {
         val tid = requireTenantId()
-        val system = postgrest.from("clinical_procedures").select { filter("tenant_id", FilterOperator.IS, null) }.decodeList<ClinicalProcedure>()
-        val tenant = postgrest.from("clinical_procedures").select { filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<ClinicalProcedure>()
+        val system = postgrest.from("clinical_procedures").select { filter { exact("tenant_id", null) } }.decodeList<ClinicalProcedure>()
+        val tenant = postgrest.from("clinical_procedures").select { filter { eq("tenant_id", tid) } }.decodeList<ClinicalProcedure>()
         return system + tenant
     }
 
     suspend fun getClinicalProcedureById(id: Int): ClinicalProcedure? {
-        return postgrest.from("clinical_procedures").select { filter("id", FilterOperator.EQ, id) }.decodeList<ClinicalProcedure>().firstOrNull()
+        return postgrest.from("clinical_procedures").select { filter { eq("id", id) } }.decodeList<ClinicalProcedure>().firstOrNull()
     }
 
     suspend fun insertClinicalProcedure(proc: ClinicalProcedure): Int {
@@ -318,25 +318,25 @@ class SupabaseRepository {
     }
 
     suspend fun updateClinicalProcedure(proc: ClinicalProcedure) {
-        postgrest.from("clinical_procedures").update(proc) { filter("id", FilterOperator.EQ, proc.id) }
+        postgrest.from("clinical_procedures").update(proc) { filter { eq("id", proc.id) } }
     }
 
     suspend fun deleteCustomClinicalProcedure(id: Int) {
-        postgrest.from("clinical_procedures").delete { filter("id", FilterOperator.EQ, id); filter("is_custom", FilterOperator.EQ, true) }
+        postgrest.from("clinical_procedures").delete { filter { eq("id", id); eq("is_custom", true) } }
     }
 
     // ─── Procedure Types ───────────────────────────────────────────────────────
 
     fun getTypesByClinicalProcedureId(cpId: Int): Flow<List<ProcedureType>> = flow {
-        emit(postgrest.from("procedure_types").select { filter("clinical_procedure_id", FilterOperator.EQ, cpId) }.decodeList<ProcedureType>())
+        emit(postgrest.from("procedure_types").select { filter { eq("clinical_procedure_id", cpId) } }.decodeList<ProcedureType>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun getTypesByClinicalProcedureIdOnce(cpId: Int): List<ProcedureType> {
-        return postgrest.from("procedure_types").select { filter("clinical_procedure_id", FilterOperator.EQ, cpId) }.decodeList<ProcedureType>()
+        return postgrest.from("procedure_types").select { filter { eq("clinical_procedure_id", cpId) } }.decodeList<ProcedureType>()
     }
 
     suspend fun getProcedureTypeById(id: Int): ProcedureType? {
-        return postgrest.from("procedure_types").select { filter("id", FilterOperator.EQ, id) }.decodeList<ProcedureType>().firstOrNull()
+        return postgrest.from("procedure_types").select { filter { eq("id", id) } }.decodeList<ProcedureType>().firstOrNull()
     }
 
     suspend fun insertProcedureType(type: ProcedureType): Int {
@@ -344,21 +344,21 @@ class SupabaseRepository {
     }
 
     suspend fun updateProcedureType(type: ProcedureType) {
-        postgrest.from("procedure_types").update(type) { filter("id", FilterOperator.EQ, type.id) }
+        postgrest.from("procedure_types").update(type) { filter { eq("id", type.id) } }
     }
 
     suspend fun deleteProcedureType(type: ProcedureType) {
-        postgrest.from("procedure_types").delete { filter("id", FilterOperator.EQ, type.id) }
+        postgrest.from("procedure_types").delete { filter { eq("id", type.id) } }
     }
 
     // ─── Clinical Procedure Steps ──────────────────────────────────────────────
 
     suspend fun getStepsByClinicalProcedureIdOnce(cpId: Int): List<ClinicalProcedureStep> {
-        return postgrest.from("clinical_procedure_steps").select { filter("clinical_procedure_id", FilterOperator.EQ, cpId) }.decodeList<ClinicalProcedureStep>()
+        return postgrest.from("clinical_procedure_steps").select { filter { eq("clinical_procedure_id", cpId) } }.decodeList<ClinicalProcedureStep>()
     }
 
     suspend fun getStepsByProcedureTypeIdOnce(ptId: Int): List<ClinicalProcedureStep> {
-        return postgrest.from("clinical_procedure_steps").select { filter("procedure_type_id", FilterOperator.EQ, ptId) }.decodeList<ClinicalProcedureStep>()
+        return postgrest.from("clinical_procedure_steps").select { filter { eq("procedure_type_id", ptId) } }.decodeList<ClinicalProcedureStep>()
     }
 
     suspend fun insertClinicalProcedureStep(step: ClinicalProcedureStep): Int {
@@ -366,23 +366,23 @@ class SupabaseRepository {
     }
 
     suspend fun deleteClinicalProcedureStep(step: ClinicalProcedureStep) {
-        postgrest.from("clinical_procedure_steps").delete { filter("id", FilterOperator.EQ, step.id) }
+        postgrest.from("clinical_procedure_steps").delete { filter { eq("id", step.id) } }
     }
 
     // ─── Procedure Cards ──────────────────────────────────────────────────────
 
     fun getProcedureCards(): Flow<List<ProcedureCard>> = flow {
         val tid = requireTenantId()
-        emit(postgrest.from("procedure_cards").select { filter("tenant_id", FilterOperator.EQ, tid); filter("deleted_at", FilterOperator.IS, null) }.decodeList<ProcedureCard>())
+        emit(postgrest.from("procedure_cards").select { filter { eq("tenant_id", tid); exact("deleted_at", null) } }.decodeList<ProcedureCard>())
     }.flowOn(Dispatchers.IO)
 
     fun getProcedureCardsByPatientId(patientId: Int): Flow<List<ProcedureCard>> = flow {
         val tid = requireTenantId()
-        emit(postgrest.from("procedure_cards").select { filter("patient_id", FilterOperator.EQ, patientId); filter("tenant_id", FilterOperator.EQ, tid); filter("deleted_at", FilterOperator.IS, null) }.decodeList<ProcedureCard>())
+        emit(postgrest.from("procedure_cards").select { filter { eq("patient_id", patientId); eq("tenant_id", tid); exact("deleted_at", null) } }.decodeList<ProcedureCard>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun getProcedureCardById(id: Int): ProcedureCard? {
-        return postgrest.from("procedure_cards").select { filter("id", FilterOperator.EQ, id) }.decodeList<ProcedureCard>().firstOrNull()
+        return postgrest.from("procedure_cards").select { filter { eq("id", id) } }.decodeList<ProcedureCard>().firstOrNull()
     }
 
     suspend fun insertProcedureCard(card: ProcedureCard): Int {
@@ -392,7 +392,8 @@ class SupabaseRepository {
     }
 
     suspend fun updateProcedureCard(card: ProcedureCard) {
-        postgrest.from("procedure_cards").update(card) { filter("id", FilterOperator.EQ, card.id) }
+        val tid = requireTenantId()
+        postgrest.from("procedure_cards").update(card) { filter { eq("id", card.id); eq("tenant_id", tid) } }
     }
 
     suspend fun deleteProcedureCard(card: ProcedureCard) {
@@ -400,14 +401,17 @@ class SupabaseRepository {
     }
 
     suspend fun softDeleteProcedureCard(id: Int) {
-        postgrest.from("procedure_cards").update(mapOf("deleted_at" to Instant.now().toString())) { filter("id", FilterOperator.EQ, id) }
+        val tid = requireTenantId()
+        postgrest.from("procedure_cards").update(mapOf("deleted_at" to Instant.now().toString())) { 
+            filter { eq("id", id); eq("tenant_id", tid) } 
+        }
     }
 
     // ─── Procedure Cards with Details (client-side join) ──────────────────────
 
     fun getAllProcedureCardsWithDetails(): Flow<List<ProcedureCardDetail>> = flow {
         val tid = requireTenantId()
-        val cards = postgrest.from("procedure_cards").select { filter("tenant_id", FilterOperator.EQ, tid); filter("deleted_at", FilterOperator.IS, null) }.decodeList<ProcedureCard>()
+        val cards = postgrest.from("procedure_cards").select { filter { eq("tenant_id", tid); exact("deleted_at", null) } }.decodeList<ProcedureCard>()
         if (cards.isEmpty()) { emit(emptyList()); return@flow }
         val details = buildCardDetails(cards)
         emit(details)
@@ -415,7 +419,7 @@ class SupabaseRepository {
 
     fun getProcedureCardsByPatientIdWithDetails(patientId: Int): Flow<List<ProcedureCardDetail>> = flow {
         val tid = requireTenantId()
-        val cards = postgrest.from("procedure_cards").select { filter("patient_id", FilterOperator.EQ, patientId); filter("tenant_id", FilterOperator.EQ, tid); filter("deleted_at", FilterOperator.IS, null) }.decodeList<ProcedureCard>()
+        val cards = postgrest.from("procedure_cards").select { filter { eq("patient_id", patientId); eq("tenant_id", tid); exact("deleted_at", null) } }.decodeList<ProcedureCard>()
         if (cards.isEmpty()) { emit(emptyList()); return@flow }
         val details = buildCardDetails(cards)
         emit(details)
@@ -427,10 +431,10 @@ class SupabaseRepository {
         val procIds = cards.map { it.clinicalProcedureId }.distinct()
         val typeIds = cards.mapNotNull { it.procedureTypeId }.distinct()
 
-        val patients = postgrest.from("patients").select { filter("id", FilterOperator.IN, inFilter(patientIds)) }.decodeList<Patient>().associateBy { it.id }
-        val clinics = postgrest.from("clinics").select { filter("id", FilterOperator.IN, inFilter(clinicIds)) }.decodeList<Clinic>().associateBy { it.id }
-        val procs = postgrest.from("clinical_procedures").select { filter("id", FilterOperator.IN, inFilter(procIds)) }.decodeList<ClinicalProcedure>().associateBy { it.id }
-        val types = if (typeIds.isNotEmpty()) postgrest.from("procedure_types").select { filter("id", FilterOperator.IN, inFilter(typeIds)) }.decodeList<ProcedureType>().associateBy { it.id } else emptyMap()
+        val patients = postgrest.from("patients").select { filter { isIn("id", patientIds) } }.decodeList<Patient>().associateBy { it.id }
+        val clinics = postgrest.from("clinics").select { filter { isIn("id", clinicIds) } }.decodeList<Clinic>().associateBy { it.id }
+        val procs = postgrest.from("clinical_procedures").select { filter { isIn("id", procIds) } }.decodeList<ClinicalProcedure>().associateBy { it.id }
+        val types = if (typeIds.isNotEmpty()) postgrest.from("procedure_types").select { filter { isIn("id", typeIds) } }.decodeList<ProcedureType>().associateBy { it.id } else emptyMap()
 
         return cards.map { c ->
             ProcedureCardDetail(
@@ -452,11 +456,11 @@ class SupabaseRepository {
     // ─── Procedure Card Steps ──────────────────────────────────────────────────
 
     fun getStepsByProcedureCardId(cardId: Int): Flow<List<ProcedureCardStep>> = flow {
-        emit(postgrest.from("procedure_card_steps").select { filter("procedure_card_id", FilterOperator.EQ, cardId) }.decodeList<ProcedureCardStep>())
+        emit(postgrest.from("procedure_card_steps").select { filter { eq("procedure_card_id", cardId) } }.decodeList<ProcedureCardStep>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun getStepsByProcedureCardIdOnce(cardId: Int): List<ProcedureCardStep> {
-        return postgrest.from("procedure_card_steps").select { filter("procedure_card_id", FilterOperator.EQ, cardId) }.decodeList<ProcedureCardStep>()
+        return postgrest.from("procedure_card_steps").select { filter { eq("procedure_card_id", cardId) } }.decodeList<ProcedureCardStep>()
     }
 
     suspend fun insertProcedureCardStep(step: ProcedureCardStep): Int {
@@ -464,31 +468,31 @@ class SupabaseRepository {
     }
 
     suspend fun updateProcedureCardStep(step: ProcedureCardStep) {
-        postgrest.from("procedure_card_steps").update(step) { filter("id", FilterOperator.EQ, step.id) }
+        postgrest.from("procedure_card_steps").update(step) { filter { eq("id", step.id) } }
     }
 
     suspend fun deleteProcedureCardStep(step: ProcedureCardStep) {
-        postgrest.from("procedure_card_steps").delete { filter("id", FilterOperator.EQ, step.id) }
+        postgrest.from("procedure_card_steps").delete { filter { eq("id", step.id) } }
     }
 
     // ─── Procedure Payments ────────────────────────────────────────────────────
 
     fun getPaymentsByProcedureCardId(cardId: Int): Flow<List<ProcedurePayment>> = flow {
-        emit(postgrest.from("procedure_payments").select { filter("procedure_card_id", FilterOperator.EQ, cardId) }.decodeList<ProcedurePayment>())
+        emit(postgrest.from("procedure_payments").select { filter { eq("procedure_card_id", cardId) } }.decodeList<ProcedurePayment>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun getPaymentsByProcedureCardIdOnce(cardId: Int): List<ProcedurePayment> {
-        return postgrest.from("procedure_payments").select { filter("procedure_card_id", FilterOperator.EQ, cardId) }.decodeList<ProcedurePayment>()
+        return postgrest.from("procedure_payments").select { filter { eq("procedure_card_id", cardId) } }.decodeList<ProcedurePayment>()
     }
 
     fun getPaymentsByPatientId(patientId: Int): Flow<List<PaymentWithProcedureName>> = flow {
         val tid = requireTenantId()
-        val cards = postgrest.from("procedure_cards").select { filter("patient_id", FilterOperator.EQ, patientId); filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<ProcedureCard>()
+        val cards = postgrest.from("procedure_cards").select { filter { eq("patient_id", patientId); eq("tenant_id", tid) } }.decodeList<ProcedureCard>()
         if (cards.isEmpty()) { emit(emptyList()); return@flow }
         val cardIds = cards.map { it.id }
-        val payments = postgrest.from("procedure_payments").select { filter("procedure_card_id", FilterOperator.IN, inFilter(cardIds)) }.decodeList<ProcedurePayment>()
+        val payments = postgrest.from("procedure_payments").select { filter { isIn("procedure_card_id", cardIds) } }.decodeList<ProcedurePayment>()
         val procIds = cards.map { it.clinicalProcedureId }.distinct()
-        val procs = postgrest.from("clinical_procedures").select { filter("id", FilterOperator.IN, inFilter(procIds)) }.decodeList<ClinicalProcedure>().associateBy { it.id }
+        val procs = postgrest.from("clinical_procedures").select { filter { isIn("id", procIds) } }.decodeList<ClinicalProcedure>().associateBy { it.id }
         val cardMap = cards.associateBy { it.id }
         emit(payments.map { p ->
             val card = cardMap[p.procedureCardId]
@@ -507,18 +511,18 @@ class SupabaseRepository {
     }
 
     suspend fun deleteProcedurePayment(payment: ProcedurePayment) {
-        postgrest.from("procedure_payments").delete { filter("id", FilterOperator.EQ, payment.id) }
+        postgrest.from("procedure_payments").delete { filter { eq("id", payment.id) } }
     }
 
     suspend fun updateProcedurePayment(payment: ProcedurePayment) {
-        postgrest.from("procedure_payments").update(payment) { filter("id", FilterOperator.EQ, payment.id) }
+        postgrest.from("procedure_payments").update(payment) { filter { eq("id", payment.id) } }
     }
 
     // ─── Medical Files ─────────────────────────────────────────────────────────
 
     fun getMedicalFilesByPatientId(patientId: Int): Flow<List<MedicalFile>> = flow {
         val tid = requireTenantId()
-        emit(postgrest.from("medical_files").select { filter("patient_id", FilterOperator.EQ, patientId); filter("tenant_id", FilterOperator.EQ, tid) }.decodeList<MedicalFile>())
+        emit(postgrest.from("medical_files").select { filter { eq("patient_id", patientId); eq("tenant_id", tid) } }.decodeList<MedicalFile>())
     }.flowOn(Dispatchers.IO)
 
     suspend fun insertMedicalFile(file: MedicalFile) {
@@ -528,6 +532,7 @@ class SupabaseRepository {
     }
 
     suspend fun deleteMedicalFile(fileId: String) {
-        postgrest.from("medical_files").delete { filter("id", FilterOperator.EQ, fileId) }
+        val tid = requireTenantId()
+        postgrest.from("medical_files").delete { filter { eq("id", fileId); eq("tenant_id", tid) } }
     }
 }
