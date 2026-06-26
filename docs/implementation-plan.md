@@ -186,7 +186,11 @@ Each section below is a self-contained **Spic-Kit**. Feed them to OpenCode one a
 - `tenant_id` is present on every inserted row (verify in Supabase dashboard)
 
 ---
-
+> **⚠️ CRITICAL LEARNING (post-KIT-09):** The `patients` table has an unresolved Supabase platform-level RLS anomaly affecting UPDATE operations — even a fully permissive `USING(true) WITH CHECK(true)` policy returns a 42501 error. Root cause unknown after exhaustive debugging (policy logic, helper functions, grants, role targeting, schema cache reload, table type, inheritance — all ruled out).
+>
+> **Workaround:** All UPDATE operations on `patients` (and any other table showing the same symptom) must go through a `SECURITY DEFINER` RPC function instead of a direct `.update()` call. Example: `soft_delete_patient(p_patient_id INT)`. This pattern must be used consistently on both Web (Supabase JS `.rpc()`) and Android (Kotlin SDK `postgrest.rpc()`).
+>
+> **Action for future kits:** Before implementing any UPDATE on a new table, test it first. If the same anomaly appears, immediately use the RPC pattern rather than spending time re-debugging the already-confirmed platform issue.
 ## PHASE 2 — Multi-Role & Web
 
 ---
